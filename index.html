@@ -148,3 +148,2123 @@ section[id] { scroll-margin-top: 5rem; }
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-sm { width: 15px; height: 15px; }
+.icon-md { width: 22px; height: 22px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 30px; height: 30px; }
+
+/* Square box that holds an icon */
+.icon-box {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: .75rem;
+  background: rgba(77, 166, 255, .15);
+  color: var(--blue-2);
+}
+.icon-box-lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 1rem;
+}
+.icon-box-plain {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, .1);
+  color: inherit;
+}
+
+/* ---- Text colours ---- */
+.accent   { color: var(--blue); }
+.accent-2 { color: var(--blue-2); }
+.muted    { color: var(--muted); }
+.small    { font-size: .875rem; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .875rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1.5;
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease, color .25s ease;
+  will-change: transform;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #071A47;
+  box-shadow: 0 8px 20px rgba(77, 166, 255, .30);
+}
+.btn-primary:active {
+  transform: translateY(-1px) scale(.98);
+  box-shadow: 0 8px 18px rgba(77, 166, 255, .35);
+}
+.btn-outline:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .35);
+}
+.btn-primary:hover {
+  background: var(--blue);
+  color: #071A47;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(77, 166, 255, .45);
+}
+
+.btn-outline {
+  border-color: rgba(255, 255, 255, .3);
+  color: #fff;
+  background: transparent;
+}
+.btn-outline:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, .1);
+}
+
+.btn-small {
+  padding: .625rem 1.1rem;
+  font-size: .8125rem;
+}
+.btn-block {
+  width: 100%;
+  justify-content: center;
+  padding: .875rem 1rem;
+}
+
+/* ---- Badges (small rounded labels) ---- */
+.badge {
+  display: inline-block;
+  width: fit-content;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 800;
+}
+.badge-blue    { background: var(--blue); color: #071A47; }
+.badge-outline { border: 1px solid var(--line); background: rgba(255, 255, 255, .05); }
+.badge-small {
+  padding: .375rem .75rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .05);
+  color: var(--muted);
+  font-size: .6875rem;
+  font-weight: 700;
+}
+.badge-inline {
+  margin-left: .25rem;
+  padding: .25rem .625rem;
+  border: 0;
+  background: rgba(255, 255, 255, .1);
+  vertical-align: middle;
+  font-family: 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* ---- Card that lifts when you hover it ---- */
+.card-hover {
+  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(77, 166, 255, .65);
+  background: var(--card-hover);
+}
+
+/* ---- Link with arrow ---- */
+.link-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  color: var(--blue-2);
+}
+.link-small {
+  margin-top: 0;
+  gap: .25rem;
+  font-size: .875rem;
+}
+
+/* ---- Small spaced-out label above titles ---- */
+.small-kicker {
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+  color: var(--blue-2);
+}
+
+/* ---- Section layout ---- */
+.section {
+  padding: 4rem 0;
+}
+@media (min-width: 1024px) { .section { padding: 6rem 0; } }
+
+.section-alt        { background: var(--alt-bg); }
+.section-border-top { border-top: 1px solid var(--line); }
+.section-border-y   { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Heading block: kicker + title + paragraph */
+.section-head { max-width: 48rem; }
+
+.section-kicker {
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .22em;
+  color: var(--blue-2);
+}
+
+.section-title {
+  margin-top: .75rem;
+  font-size: 1.875rem;
+  line-height: 1.05;
+  font-weight: 700;
+}
+@media (min-width: 640px)  { .section-title { font-size: 2.25rem; } }
+@media (min-width: 1024px) { .section-title { font-size: 44px; } }
+
+.section-copy {
+  margin-top: 1rem;
+  line-height: 1.75rem;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   4. HEADER & NAVIGATION
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 26, 71, .9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+/* Desktop menu: only shown on wide screens */
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.nav-desktop a { transition: color .15s ease; }
+.nav-desktop a:hover { color: #fff; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* "Download CV" button in the header: hidden on very small screens */
+.header-cv { display: none; }
+
+/* Hamburger button */
+.menu-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+}
+.menu-toggle .icon { width: 20px; height: 20px; }
+
+/* Mobile menu panel */
+.nav-mobile {
+  display: grid;
+  gap: .25rem;
+  padding: 1rem;
+  border-top: 1px solid var(--line);
+}
+.nav-mobile a {
+  padding: .75rem;
+  border-radius: .5rem;
+  font-weight: 600;
+}
+.nav-mobile a:hover { background: rgba(255, 255, 255, .1); }
+.nav-mobile .btn { margin-top: .75rem; }
+
+@media (min-width: 640px) {
+  .header-cv { display: inline-flex; }
+  .nav-mobile { padding: 1rem 1.5rem; }
+}
+
+/* On wide screens: show the full menu, hide the hamburger */
+@media (min-width: 1280px) {
+  .nav-desktop { display: flex; }
+  .menu-toggle { display: none; }
+  .nav-mobile  { display: none !important; }
+}
+
+
+/* =========================================================
+   5. HERO (top section)
+   ========================================================= */
+.hero {
+  background:
+    radial-gradient(560px 360px at 82% 18%, rgba(77, 166, 255, .38), transparent 62%),
+    radial-gradient(520px 420px at 8% 12%,  rgba(77, 166, 255, .18), transparent 60%),
+    linear-gradient(180deg, #0A2463 0%, #071A47 100%);
+}
+
+.hero-grid {
+  display: grid;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+@media (min-width: 640px)  { .hero-grid { padding-top: 3.5rem; } }
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1.05fr .95fr;   /* text | photo */
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* "LEARN • GROW • ACHIEVE" pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  font-size: .6875rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+  color: var(--blue-2);
+}
+
+/* Big name */
+.hero-title {
+  margin-top: 1.5rem;
+  font-size: 52px;
+  line-height: .92;
+  font-weight: 700;
+}
+@media (min-width: 640px)  { .hero-title { font-size: 4.5rem; } }
+@media (min-width: 1024px) { .hero-title { font-size: 86px; } }
+
+.hero-lead {
+  max-width: 36rem;
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: var(--muted);
+}
+.hero-lead strong { color: #fff; }
+@media (min-width: 640px) { .hero-lead { font-size: 1.25rem; } }
+
+.hero-copy {
+  max-width: 36rem;
+  margin-top: 1rem;
+  line-height: 1.75rem;
+  color: var(--muted);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+/* Three numbers box */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 36rem;
+  margin-top: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(7, 26, 71, .5);
+}
+.stat { padding: 1rem; }
+.stat + .stat { border-left: 1px solid rgba(255, 255, 255, .1); }
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+.stat-label {
+  margin-top: .25rem;
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .025em;
+  color: var(--muted);
+}
+
+/* Portrait photo */
+.portrait-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+  /* දකුණේ ඉඳන් හෙමින්, smoothව වමට එනවා විතරයි — ලොකු / පොඩි වෙන්නේ නෑ */
+  animation: portraitEnter 2.4s cubic-bezier(.22, 1, .36, 1) .25s both;
+  will-change: transform, opacity;
+}
+@keyframes portraitEnter {
+  0%   { transform: translateX(110%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+/* Hero text එකත් හෙමින්, smoothව එන්න */
+.hero-text .pill {
+  animation: heroFadeUp 1.6s cubic-bezier(.22, 1, .36, 1) .1s both;
+}
+.hero-title {
+  animation: heroFadeUp 1.8s cubic-bezier(.22, 1, .36, 1) .25s both;
+}
+.hero-lead {
+  animation: heroFadeUp 1.8s cubic-bezier(.22, 1, .36, 1) .45s both;
+}
+.hero-copy {
+  animation: heroFadeUp 1.8s cubic-bezier(.22, 1, .36, 1) .6s both;
+}
+.hero-buttons {
+  animation: heroFadeUp 1.8s cubic-bezier(.22, 1, .36, 1) .75s both;
+}
+.stats {
+  animation: heroFadeUp 1.8s cubic-bezier(.22, 1, .36, 1) .9s both;
+}
+@keyframes heroFadeUp {
+  0%   { transform: translateY(22px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #4DA6FF 0%, #2B6FE8 48%, #0A2463 100%);
+  box-shadow: 0 32px 70px rgba(0, 0, 0, .38), 0 0 0 1px rgba(255, 255, 255, .18);
+}
+.portrait-img-box {
+  overflow: hidden;
+  border-radius: 22px;
+  background: #0A2463;
+}
+.portrait-img-box img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center;
+  background: #071A47;
+}
+
+/* Small label at top-left of the photo */
+.portrait-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  max-width: calc(100% - 2.5rem);
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+  padding: .5rem .875rem;
+  border-radius: 999px;
+  background: rgba(7, 26, 71, .85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: .6875rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+/* University card at the bottom of the photo */
+.portrait-card {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-width: 0;
+  padding: .875rem;
+  border-radius: 1rem;
+  background: rgba(7, 26, 71, .9);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.portrait-card-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #071A47;
+}
+.portrait-card > div { min-width: 0; }
+.portrait-card-title {
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.portrait-card-sub {
+  font-size: .75rem;
+  color: var(--muted);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+/* Strip under the hero */
+.hero-strip-wrap { padding-bottom: 2rem; }
+.hero-strip {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, .04);
+}
+.hero-strip-left {
+  font-weight: 700;
+  letter-spacing: .025em;
+}
+.hero-strip-right {
+  font-size: .875rem;
+  color: var(--muted);
+}
+.hero-strip-right .dot { margin: 0 .25rem; }
+@media (min-width: 640px) {
+  .hero-strip {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+/* =========================================================
+   6. ABOUT
+   ========================================================= */
+.about-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+@media (min-width: 1024px) {
+  .about-grid { grid-template-columns: 1.25fr .75fr; }
+}
+
+.about-text {
+  margin-top: 1.75rem;
+  color: var(--muted);
+  line-height: 2rem;
+}
+.about-text p + p { margin-top: 1.25rem; }
+.about-text strong { color: #fff; }
+.about-text strong.accent-2 { color: var(--blue-2); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 2rem;
+}
+.tag {
+  padding: .5rem .875rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* "At a glance" box */
+.glance {
+  align-self: start;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+@media (min-width: 640px) { .glance { padding: 1.75rem; } }
+
+.glance-list { margin-top: 1.5rem; }
+.glance-item {
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+.glance-item:last-child {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.glance-item dt {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted-2);
+}
+.glance-item dd {
+  margin-top: .375rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+
+/* =========================================================
+   7. EDUCATION
+   ========================================================= */
+.panel {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+.panel-second { margin-top: 1.5rem; }
+@media (min-width: 640px) { .panel { padding: 2rem; } }
+
+.panel-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .panel-head {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.panel-title {
+  margin-top: .5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+@media (min-width: 640px) { .panel-title { font-size: 1.875rem; } }
+.panel-head .muted { margin-top: .375rem; }
+
+/* A/L subject cards */
+.al-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+@media (min-width: 640px) { .al-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.subject-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+  background: var(--navy);
+  text-align: center;
+}
+.grade-big {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--blue);
+}
+.subject-card h4 {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.subject-card .muted { margin-top: .25rem; }
+
+/* O/L subject list */
+.ol-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem;
+  margin-top: 1.75rem;
+}
+@media (min-width: 640px) { .ol-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.ol-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: .75rem;
+  background: var(--navy);
+}
+.ol-item > span:first-child { font-weight: 600; }
+
+/* Round grade circle */
+.grade {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+.grade-a { background: var(--blue); color: #071A47; }
+.grade-b { background: rgba(255, 255, 255, .15); color: #fff; }
+.grade-c {
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   8. LEADERSHIP
+   ========================================================= */
+.role-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 768px)  { .role-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .role-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+.role-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.role-title {
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.role-org {
+  margin-top: .25rem;
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--blue-2);
+}
+.role-text {
+  margin-top: .75rem;
+  line-height: 1.75rem;
+  color: var(--muted);
+}
+
+/* Solid blue card at the end */
+.role-card-solid {
+  justify-content: center;
+  border: 0;
+  background: var(--blue);
+  color: #071A47;
+}
+.role-card-solid h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.role-card-solid p {
+  margin-top: .75rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  color: var(--navy);
+}
+
+
+/* =========================================================
+   9. SKILLS
+   ========================================================= */
+.skill-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 768px) { .skill-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.skill-card {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--card);
+}
+@media (min-width: 640px) { .skill-card { padding: 1.5rem; } }
+
+.skill-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.skill-info {
+  display: flex;
+  gap: .75rem;
+}
+.skill-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.skill-info .muted { margin-top: .25rem; }
+.skill-percent {
+  font-weight: 700;
+  color: var(--blue-2);
+}
+
+/* Progress bar: the inner <div> width is set in the HTML */
+.progress {
+  height: .5rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .14);
+}
+.progress > div {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4DA6FF, #7EC0FF);
+}
+
+
+/* =========================================================
+   10. PROJECTS
+   ========================================================= */
+.projects-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.projects-head .btn {
+  width: fit-content;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, .2);
+}
+@media (min-width: 640px) {
+  .projects-head {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.project-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 1024px) { .project-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+.project-card-current { border-color: rgba(77, 166, 255, .5); }
+.project-card-soon {
+  border: 1px dashed rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .03);
+}
+
+/* Small status tag at the top of each project */
+.status {
+  width: fit-content;
+  padding: .375rem .75rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 800;
+}
+.status-live    { background: rgba(52, 211, 153, .15); color: var(--green); }
+.status-current { background: var(--blue); color: #071A47; }
+.status-soon    { border: 1px solid rgba(255, 255, 255, .15); color: var(--muted); }
+
+.project-title {
+  margin-top: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.project-text {
+  margin-top: .75rem;
+  line-height: 1.75rem;
+  color: var(--muted);
+}
+.project-url {
+  margin-top: 1rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--blue-2);
+  word-break: break-all;
+}
+
+/* "View project" link / button */
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  width: fit-content;
+  margin-top: auto;
+  padding: 1.5rem 0 0;
+  border: 0;
+  background: none;
+  font-weight: 700;
+  color: #fff;
+}
+
+.project-note {
+  margin-top: .75rem;
+  padding: .625rem .75rem;
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, .1);
+  font-size: .875rem;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   11. CONTACT
+   ========================================================= */
+.contact-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: .85fr 1.15fr; } }
+
+.contact-list {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+  background: var(--card);
+}
+.contact-label {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted-2);
+}
+.contact-value {
+  display: block;
+  margin-top: .25rem;
+  font-weight: 700;
+}
+.contact-break { word-break: break-all; }
+.contact-arrow {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+}
+.contact-note {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, .04);
+  font-size: .875rem;
+  color: var(--muted);
+}
+
+/* Form */
+.contact-form {
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+@media (min-width: 640px) { .contact-form { padding: 1.75rem; } }
+
+.contact-form h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.form-hint {
+  margin-top: .5rem;
+  font-size: .875rem;
+  line-height: 1.5rem;
+  color: var(--muted);
+}
+.form-row {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 640px) { .form-row { grid-template-columns: repeat(2, 1fr); } }
+
+.contact-form label { display: block; }
+.form-message { margin-top: 1rem; }
+.form-label {
+  display: block;
+  margin-bottom: .5rem;
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: .875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: .75rem;
+  background: #071A47;
+  color: #fff;
+  outline: none;
+}
+.contact-form textarea { resize: none; }
+.contact-form ::placeholder {
+  color: rgba(255, 255, 255, .4);
+  opacity: 1;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(77, 166, 255, .22);
+}
+.contact-form .btn { margin-top: 1.25rem; }
+
+.form-status {
+  margin-top: 1rem;
+  font-size: .875rem;
+  color: var(--blue-2);
+}
+
+.preview-box {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+  background: #071A47;
+}
+.preview-name {
+  margin-top: .75rem;
+  font-weight: 700;
+}
+.preview-email { font-weight: 400; }
+.preview-message {
+  margin-top: .5rem;
+  line-height: 1.75rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   12. FOOTER
+   ========================================================= */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: #050F2E;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+.footer-logo {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+@media (min-width: 640px) {
+  .footer-inner {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+
+/* =========================================================
+   13. CV POP-UP
+   ========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, .7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.modal-box {
+  width: 100%;
+  max-width: 42rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.25rem;
+  border-radius: 1.5rem;
+  background: var(--navy);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, .5);
+}
+@media (min-width: 640px) { .modal-box { padding: 1.75rem; } }
+
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.modal-title {
+  margin-top: .5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.modal-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+}
+.modal-close .icon { width: 20px; height: 20px; }
+
+.modal-intro {
+  margin-top: 1rem;
+  font-size: .875rem;
+  line-height: 1.5rem;
+  color: var(--muted);
+}
+.modal-label {
+  display: block;
+  margin-top: 1.25rem;
+}
+.modal-label textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 1rem;
+  background: #071A47;
+  color: #fff;
+  font-size: .875rem;
+  line-height: 1.5rem;
+}
+.modal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.copied-msg {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .75rem;
+  font-size: .875rem;
+  color: var(--green);
+}
+
+
+/* =========================================================
+   14. SMALL HELPERS
+   ========================================================= */
+
+/* Text that only screen readers see */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respect "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card-hover { transition: none; }
+  .card-hover:hover { transform: none; }
+  .portrait-wrap { animation: none; }
+  .hero-text .pill, .hero-title, .hero-lead, .hero-copy, .hero-buttons, .stats { animation: none; }
+}
+
+.logo-web{display:inline-flex;align-items:center;padding:.15rem .6rem;margin-left:.35rem;border-radius:999px;background:linear-gradient(135deg,#4DA6FF,#7EC0FF);color:#071A47;font-size:.78em;font-weight:800;letter-spacing:.12em;box-shadow:0 4px 14px rgba(77,166,255,.45)} .stat-sub{margin-top:.2rem;font-size:.72rem;font-weight:700;color:var(--blue-2)} .ruhuna-logo-small{width:20px;height:28px;object-fit:contain;vertical-align:-7px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:38px;object-fit:contain;border-radius:0;background:transparent;padding:0} .nav-desktop a{opacity:0;animation:navRise .7s cubic-bezier(.22,1,.36,1) both, navBubble 4.9s ease-in-out infinite} .nav-desktop a:nth-child(1){animation-delay:.15s,3.9s} .nav-desktop a:nth-child(2){animation-delay:.35s,4.25s} .nav-desktop a:nth-child(3){animation-delay:.55s,4.6s} .nav-desktop a:nth-child(4){animation-delay:.75s,4.95s} .nav-desktop a:nth-child(5){animation-delay:.95s,5.3s} .nav-desktop a:nth-child(6){animation-delay:1.15s,5.65s} .nav-desktop a:nth-child(7){animation-delay:1.35s,6s} @keyframes navRise{0%{transform:translateY(26px);opacity:0}100%{transform:translateY(0);opacity:1}} @keyframes navBubble{0%,88%,100%{transform:scale(1);text-shadow:none}92%{transform:scale(1.14);color:#fff;text-shadow:0 0 14px rgba(126,192,255,.95),0 0 28px rgba(77,166,255,.7)}96%{transform:scale(1.05)}} .nav-mobile a{animation:navRise .5s ease both} @media (prefers-reduced-motion: reduce){.nav-desktop a{animation:none!important;opacity:1}}.ruhuna-logo-strip{width:auto;height:44px;flex-shrink:0;object-fit:contain;vertical-align:middle;margin-right:.6rem;background:transparent;border-radius:0;padding:0;display:inline-block} .ruhuna-logo-small{width:22px;height:31px;object-fit:contain;vertical-align:-8px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:39px;object-fit:contain;border-radius:0;background:transparent;padding:0}.hero-strip{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;overflow:visible} .hero-strip-left{display:flex;align-items:center;gap:.5rem;overflow:visible;min-width:0} .hero-strip-left img{flex-shrink:0} </style>
+</head>
+<body>
+<!-- =====================================================================
+  ✏️ EDIT KARANA HATTI — මේ file එක විතරක් edit කරන්න
+  1. NAME / TEXT: Ctrl+F කරලා හොයලා වෙනස් කරන්න (උදා: Chanithu Liyanage)
+  2. PHOTO: portrait.png කියන file එක replace කරන්න (ඒ නමින්ම තියන්න)
+  3. COVER PHOTO: cover.jpg — WhatsApp / social share එකට / hero එකට
+  4. EMAIL: "Email placeholder" කියලා search කරලා ඔයාගේ email එක දාන්න
+  5. COLOUR: <style> ඇතුලේ :root කියන තැන — --blue, --bg වගේ
+  6. NEW SECTION: තියෙන <section> එකක් copy කරලා paste කරන්න, menu එකටත් link එකක් දාන්න
+  NO FRAMEWORK • NO BUILD • Double-click කරලා open කරන්න පුළුවන්
+  ===================================================================== -->
+
+
+  <!-- =====================================================
+       ICONS (SVG sprite)
+       Every icon on the page is defined once here and reused with:
+       <svg class="icon"><use href="#i-name"></use></svg>
+       ===================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+    <symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol>
+    <symbol id="i-git" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+  </svg>
+
+
+  <!-- =====================================================
+       HEADER / NAVIGATION
+       To add a menu link: copy one <a> in BOTH lists below
+       (desktop nav + mobile nav).
+       ===================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <!-- Logo -->
+      <a href="#home" class="logo">CHANITHU <span class="logo-web">WEB</span></a>
+
+      <!-- Desktop menu (hidden on small screens) -->
+      <nav class="nav-desktop" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Opens the CV pop-up (see script.js) -->
+        <button class="btn btn-primary btn-small header-cv" id="openCv" type="button">
+          <svg class="icon"><use href="#i-download"></use></svg> Download CV
+        </button>
+
+        <!-- Hamburger button (mobile only) -->
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="icon icon-menu"><use href="#i-menu"></use></svg>
+          <svg class="icon icon-close" hidden><use href="#i-close"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu (opens when you tap the hamburger) -->
+    <nav class="nav-mobile" id="navMobile" aria-label="Mobile" hidden>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="btn btn-primary btn-block" id="openCvMobile" type="button">
+        <svg class="icon"><use href="#i-download"></use></svg> Download CV
+      </button>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- =====================================================
+         HERO (top of the page)
+         ===================================================== -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+
+        <!-- Left side: text -->
+        <div class="hero-text">
+          <p class="pill">
+            <svg class="icon icon-sm"><use href="#i-sparkles"></use></svg> LEARN • GROW • ACHIEVE
+          </p>
+
+          <h1 class="hero-title">
+            CHANITHU<br>
+            <span class="accent">LIYANAGE</span>
+          </h1>
+
+          <p class="hero-lead">
+            <strong>DIGITAL CV & PORTFOLIO</strong> — Explore My Journey, skills and achievements.
+          </p>
+
+          <p class="hero-copy">
+            A Commerce-stream student building a career across digital, business and technology — grounded in strong academics and school leadership.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="https://chanithuwathmira-glitch.github.io/" target="_blank" rel="noopener" class="btn btn-primary">
+              View My Digital CV <svg class="icon"><use href="#i-arrow"></use></svg>
+            </a>
+            <a href="#projects" class="btn btn-outline">My Projects</a>
+          </div>
+
+          <!-- Three small numbers -->
+          <div class="stats">
+            <div class="stat">
+              <p class="stat-number">3</p>
+              <p class="stat-label">A / L SUBJECTS</p><p class="stat-sub">2A's - 1B</p>
+            </div>
+            <div class="stat">
+              <p class="stat-number">9</p>
+              <p class="stat-label">O / L SUBJECTS</p><p class="stat-sub">7A's - 1B - 1C</p>
+            </div>
+            <div class="stat">
+              <p class="stat-number">5</p>
+              <p class="stat-label">LEADERSHIP ROLES</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side: portrait photo.  Replace portrait.png to change the photo. -->
+        <div class="portrait-wrap">
+          <div class="portrait-frame">
+            <div class="portrait-img-box">
+              <img src="portrait.png" alt="Portrait of Chanithu Liyanage">
+            </div>
+
+            <div class="portrait-badge">DIGITAL CV • PORTFOLIO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- University strip under the hero -->
+      <div class="container hero-strip-wrap">
+        <div class="hero-strip">
+          <p class="hero-strip-left">
+            <img class="ruhuna-logo-strip" src="ruhuna-logo.png" alt="University of Ruhuna logo"><span class="accent">UNIVERSITY OF RUHUNA</span>
+            <span class="muted">| Strive for a Better Tomorrow</span>
+          </p>
+          <p class="hero-strip-right">
+            Commerce Stream <span class="accent dot">•</span> Aspiring Professional
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT
+         ===================================================== -->
+    <section id="about" class="section section-alt section-border-top">
+      <div class="container about-grid">
+
+        <div>
+          <div class="section-head">
+            <p class="section-kicker">ABOUT • PROFESSIONAL SUMMARY</p>
+            <h2 class="section-title">A Commerce student with discipline, leadership and a digital direction.</h2>
+          </div>
+
+          <div class="about-text">
+            <p>
+              I am a Commerce-stream student from <strong>Loyola College</strong>, with a strong academic record across both Advanced and Ordinary Level examinations. My time at school was shaped as much outside the classroom as inside it — through leadership, scouting, sport, media and debate.
+            </p>
+            <p>
+              As <strong>Senior Prefect</strong>, I learned responsibility, consistency and how to represent a school community. As a team member — on the field, in a troop and in a media unit — I learned preparation, communication and working for a shared result.
+            </p>
+            <p>
+              Now, I am building a career across <strong>digital, business and technology</strong>. This site brings my CV and portfolio together in one place: the record, the skills and the work that follows. My focus stays simple — <strong class="accent-2">Learn. Grow. Achieve.</strong>
+            </p>
+          </div>
+
+          <!-- Small tags. Copy a <span> to add more. -->
+          <div class="tags">
+            <span class="tag">Commerce Stream</span>
+            <span class="tag">Loyola College</span>
+            <span class="tag">Senior Prefect</span>
+            <span class="tag">Web Development</span>
+            <span class="tag">Leadership</span>
+          </div>
+        </div>
+
+        <!-- "At a glance" box -->
+        <aside class="glance">
+          <p class="small-kicker">AT A GLANCE</p>
+          <dl class="glance-list">
+            <div class="glance-item">
+              <dt>Current path</dt>
+              <dd><img class="ruhuna-logo-small" src="ruhuna-logo.png" alt=""> University of Ruhuna</dd>
+            </div>
+            <div class="glance-item">
+              <dt>Stream</dt>
+              <dd>Commerce</dd>
+            </div>
+            <div class="glance-item">
+              <dt>School</dt>
+              <dd>Loyola College, Bopitiya</dd>
+            </div>
+            <div class="glance-item">
+              <dt>A / L 2025</dt>
+              <dd>Accounting A · Business Studies A · Economics B</dd>
+            </div>
+            <div class="glance-item">
+              <dt>Focus</dt>
+              <dd>Digital · Business · Technology</dd>
+            </div>
+          </dl>
+          <a href="#contact" class="link-accent">
+            Get in touch <svg class="icon"><use href="#i-arrow"></use></svg>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         EDUCATION
+         ===================================================== -->
+    <section id="education" class="section">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="section-kicker">EDUCATION • DIGITAL CV</p>
+          <h2 class="section-title">Results that reflect steady, focused work.</h2>
+          <p class="section-copy">
+            The qualifications below are presented as recorded — from Advanced Level Commerce at Loyola College to Ordinary Level at Nayakakanda Archbishops College.
+          </p>
+        </div>
+
+        <!-- Advanced Level box -->
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="small-kicker">G.C.E. ADVANCED LEVEL • 2025</p>
+              <h3 class="panel-title">Commerce Stream</h3>
+              <p class="muted">Loyola College, Bopitiya</p>
+            </div>
+            <span class="badge badge-blue">2 A’s · 1 B</span>
+          </div>
+
+          <div class="al-grid">
+            <article class="subject-card card-hover">
+              <p class="grade-big">A</p>
+              <h4>Accounting</h4>
+              <p class="muted small">Commerce Stream</p>
+            </article>
+            <article class="subject-card card-hover">
+              <p class="grade-big">A</p>
+              <h4>Business Studies</h4>
+              <p class="muted small">Commerce Stream</p>
+            </article>
+            <article class="subject-card card-hover">
+              <p class="grade-big">B</p>
+              <h4>Economics</h4>
+              <p class="muted small">Commerce Stream</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Ordinary Level box.
+             Grade circle colours:  grade-a (blue) · grade-b (light) · grade-c (dim) -->
+        <div class="panel panel-second">
+          <div class="panel-head">
+            <div>
+              <p class="small-kicker">G.C.E. ORDINARY LEVEL • 2022 / 2023</p>
+              <h3 class="panel-title">Nine subjects</h3>
+              <p class="muted">Nayakakanda Archbishops College</p>
+            </div>
+            <span class="badge badge-outline">7 A’s · 1 B · 1 C</span>
+          </div>
+
+          <div class="ol-grid">
+            <div class="ol-item"><span>Mathematics</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>Science</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>English</span><span class="grade grade-b">B</span></div>
+            <div class="ol-item"><span>Commerce</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>Sinhala</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>History</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>Health Science</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>Religion</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item"><span>Art</span><span class="grade grade-c">C</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         LEADERSHIP
+         To add a role: copy one <article class="role-card"> block.
+         ===================================================== -->
+    <section id="leadership" class="section section-alt section-border-y">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="section-kicker">LEADERSHIP & ACTIVITIES</p>
+          <h2 class="section-title">Leadership learned by doing.</h2>
+          <p class="section-copy">
+            Each role added a different skill — responsibility, teamwork, discipline, communication and confidence.
+          </p>
+        </div>
+
+        <div class="role-grid">
+
+          <article class="role-card card-hover">
+            <div class="role-top">
+              <span class="icon-box icon-box-lg"><svg class="icon icon-lg"><use href="#i-award"></use></svg></span>
+              <span class="badge badge-small">2022 — 2023</span>
+            </div>
+            <h3 class="role-title">Senior Prefect</h3>
+            <p class="role-org">Nayakakanda Archbishops College</p>
+            <p class="role-text">A school leadership role built on responsibility, discipline and service to the school community.</p>
+          </article>
+
+          <article class="role-card card-hover">
+            <div class="role-top">
+              <span class="icon-box icon-box-lg"><svg class="icon icon-lg"><use href="#i-flag"></use></svg></span>
+              <span class="badge badge-small">School years</span>
+            </div>
+            <h3 class="role-title">Member, Scout Troop</h3>
+            <p class="role-org">Scouting</p>
+            <p class="role-text">Teamwork, outdoor discipline and learning through service and shared responsibility.</p>
+          </article>
+
+          <article class="role-card card-hover">
+            <div class="role-top">
+              <span class="icon-box icon-box-lg"><svg class="icon icon-lg"><use href="#i-trophy"></use></svg></span>
+              <span class="badge badge-small">School years</span>
+            </div>
+            <h3 class="role-title">Member, Under-19 Cricket Team</h3>
+            <p class="role-org">School Sport</p>
+            <p class="role-text">Match discipline, preparation and playing a defined role for the team.</p>
+          </article>
+
+          <article class="role-card card-hover">
+            <div class="role-top">
+              <span class="icon-box icon-box-lg"><svg class="icon icon-lg"><use href="#i-megaphone"></use></svg></span>
+              <span class="badge badge-small">School years</span>
+            </div>
+            <h3 class="role-title">Member, Media Unit</h3>
+            <p class="role-org">Loyola College</p>
+            <p class="role-text">Helping present school life and events clearly through media and communication.</p>
+          </article>
+
+          <article class="role-card card-hover">
+            <div class="role-top">
+              <span class="icon-box icon-box-lg"><svg class="icon icon-lg"><use href="#i-users"></use></svg></span>
+              <span class="badge badge-small">School years</span>
+            </div>
+            <h3 class="role-title">Member, Debate Team</h3>
+            <p class="role-org">Loyola College</p>
+            <p class="role-text">Structured thinking, evidence, listening and confident public speaking.</p>
+          </article>
+
+          <!-- Solid blue card -->
+          <article class="role-card role-card-solid">
+            <svg class="icon icon-xl"><use href="#i-book"></use></svg>
+            <h3>Learn • Grow • Achieve</h3>
+            <p>The principle behind the academics, the leadership and the work ahead.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SKILLS
+         Change the % by editing BOTH the number in
+         <span class="skill-percent"> and  style="width:82%"
+         ===================================================== -->
+    <section id="skills" class="section">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="section-kicker">SKILLS</p>
+          <h2 class="section-title">A practical mix of digital, business and people skills.</h2>
+          <p class="section-copy">
+            Levels are self-assessed and show where my current focus sits — not an external certification.
+          </p>
+        </div>
+
+        <div class="skill-grid">
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-monitor"></use></svg></span>
+                <div>
+                  <h3>Web Development</h3>
+                  <p class="muted small">HTML · CSS · JavaScript</p>
+                </div>
+              </div>
+              <span class="skill-percent">82%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Web Development skill level">
+              <div style="width:82%"></div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-palette"></use></svg></span>
+                <div>
+                  <h3>UI / UX Design</h3>
+                  <p class="muted small">Clear layouts, readable type, accessible structure</p>
+                </div>
+              </div>
+              <span class="skill-percent">78%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="UI / UX Design skill level">
+              <div style="width:78%"></div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-calculator"></use></svg></span>
+                <div>
+                  <h3>Accounting & Business Studies</h3>
+                  <p class="muted small">Commerce-stream foundation</p>
+                </div>
+              </div>
+              <span class="skill-percent">88%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Accounting and Business Studies skill level">
+              <div style="width:88%"></div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-megaphone"></use></svg></span>
+                <div>
+                  <h3>Leadership & Communication</h3>
+                  <p class="muted small">Prefect, debate & media experience</p>
+                </div>
+              </div>
+              <span class="skill-percent">90%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Leadership and Communication skill level">
+              <div style="width:90%"></div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-users"></use></svg></span>
+                <div>
+                  <h3>Teamwork & Problem Solving</h3>
+                  <p class="muted small">Scouts, cricket & group work</p>
+                </div>
+              </div>
+              <span class="skill-percent">86%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="Teamwork and Problem Solving skill level">
+              <div style="width:86%"></div>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-top">
+              <div class="skill-info">
+                <span class="icon-box"><svg class="icon icon-md"><use href="#i-git"></use></svg></span>
+                <div>
+                  <h3>Git & GitHub</h3>
+                  <p class="muted small">Publishing and versioning this site</p>
+                </div>
+              </div>
+              <span class="skill-percent">80%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Git and GitHub skill level">
+              <div style="width:80%"></div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         PROJECTS
+         ===================================================== -->
+    <section id="projects" class="section section-alt section-border-y">
+      <div class="container">
+
+        <div class="projects-head">
+          <div class="section-head">
+            <p class="section-kicker">PROJECTS • PORTFOLIO</p>
+            <h2 class="section-title">Work in progress — and work that is live.</h2>
+          </div>
+          <a href="https://chanithuwathmira-glitch.github.io/" target="_blank" rel="noopener" class="btn btn-outline btn-small">
+            <svg class="icon"><use href="#i-github"></use></svg> GitHub Pages
+          </a>
+        </div>
+
+        <div class="project-grid">
+
+          <!-- Project 1: live -->
+          <article class="project-card card-hover">
+            <span class="status status-live">● LIVE</span>
+            <h3 class="project-title">Digital CV Website</h3>
+            <p class="project-text">My CV, education and leadership presented as a clear, readable one-page site.</p>
+            <p class="project-url">chanithuwathmira-glitch.github.io</p>
+            <a href="https://chanithuwathmira-glitch.github.io/" target="_blank" rel="noopener" class="project-link">
+              View project <svg class="icon"><use href="#i-arrow"></use></svg>
+            </a>
+          </article>
+
+          <!-- Project 2: this site -->
+          <article class="project-card project-card-current card-hover">
+            <span class="status status-current">THIS SITE</span>
+            <h3 class="project-title">Personal Portfolio Website</h3>
+            <p class="project-text">CV and portfolio combined — one home for the journey, skills and achievements.</p>
+            <p class="project-url">You are here</p>
+            <a href="#home" class="project-link">
+              View project <svg class="icon"><use href="#i-arrow"></use></svg>
+            </a>
+          </article>
+
+          <!-- Project 3: coming soon -->
+          <article class="project-card project-card-soon">
+            <span class="status status-soon">COMING SOON</span>
+            <h3 class="project-title">Future Project</h3>
+            <p class="project-text">The next build will use the same foundation: useful, clear and well-made for real people.</p>
+            <button class="project-link" id="futureBtn" type="button">
+              View project <svg class="icon"><use href="#i-arrow"></use></svg>
+            </button>
+            <!-- Appears when the button above is clicked -->
+            <p class="project-note" id="futureNote" role="status" hidden>This project is not published yet — check back soon.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+         ===================================================== -->
+    <section id="contact" class="section">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="section-kicker">CONTACT</p>
+          <h2 class="section-title">Let’s stay connected.</h2>
+          <p class="section-copy">Reach out through GitHub, or leave a message using the preview form.</p>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Left column: contact details -->
+          <div class="contact-list">
+
+            <a href="https://chanithuwathmira-glitch.github.io/" target="_blank" rel="noopener" class="contact-item card-hover">
+              <span class="icon-box icon-box-plain"><svg class="icon icon-lg"><use href="#i-github"></use></svg></span>
+              <span>
+                <span class="contact-label">GitHub Pages</span>
+                <span class="contact-value contact-break">chanithuwathmira-glitch.github.io</span>
+              </span>
+              <svg class="icon contact-arrow"><use href="#i-external"></use></svg>
+            </a>
+
+            <div class="contact-item">
+              <span class="icon-box icon-box-plain"><svg class="icon icon-lg"><use href="#i-graduation"></use></svg></span>
+              <span>
+                <span class="contact-label">University</span>
+                <span class="contact-value"><img class="ruhuna-logo-small" src="ruhuna-logo.png" alt=""> University of Ruhuna</span>
+              </span>
+            </div>
+
+            <div class="contact-item">
+              <span class="icon-box icon-box-plain"><svg class="icon icon-lg"><use href="#i-mail"></use></svg></span>
+              <span>
+                <span class="contact-label">Email</span>
+                <!-- CHANGE THIS: put your real email address here -->
+                <span class="contact-value">Email placeholder — add your address here</span>
+              </span>
+            </div>
+
+            <div class="contact-note">
+              <svg class="icon accent-2"><use href="#i-pin"></use></svg>
+              Commerce Stream · Loyola College · Sri Lanka
+            </div>
+          </div>
+
+          <!-- Right column: preview form (does NOT send anything) -->
+          <form class="contact-form" id="contactForm" aria-label="Contact preview form" novalidate>
+            <h3>Send a message <span class="badge badge-small badge-inline">PREVIEW ONLY</span></h3>
+            <p class="form-hint">Complete the fields to preview your message. This form does not send or store anything.</p>
+
+            <div class="form-row">
+              <label>
+                <span class="form-label">Name</span>
+                <input type="text" id="fName" placeholder="Your name">
+              </label>
+              <label>
+                <span class="form-label">Email</span>
+                <input type="email" id="fEmail" placeholder="you@example.com">
+              </label>
+            </div>
+
+            <label class="form-message">
+              <span class="form-label">Message</span>
+              <textarea id="fMessage" rows="4" placeholder="Write your message…"></textarea>
+            </label>
+
+            <button type="submit" class="btn btn-primary">
+              Preview message <svg class="icon"><use href="#i-arrow"></use></svg>
+            </button>
+
+            <!-- Status text + preview box (filled in by script.js) -->
+            <p class="form-status" id="formStatus" role="status" hidden></p>
+
+            <div class="preview-box" id="previewBox" hidden>
+              <p class="small-kicker">YOUR PREVIEW</p>
+              <p class="preview-name"><span id="pName"></span> <span class="muted preview-email" id="pEmail"></span></p>
+              <p class="muted preview-message" id="pMessage"></p>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">CHANITHU <span class="logo-web">WEB</span></p>
+      <p class="muted small">© 2026 Chanithu Liyanage | University of Ruhuna</p>
+      <a href="#home" class="link-accent link-small">
+        Back to top <svg class="icon icon-sm"><use href="#i-up"></use></svg>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       CV POP-UP (opens from "Download CV")
+       Edit the text inside <textarea> to change the CV summary.
+       ===================================================== -->
+  <div class="modal" id="cvModal" role="dialog" aria-modal="true" aria-label="CV summary" hidden>
+    <div class="modal-box">
+
+      <div class="modal-head">
+        <div>
+          <p class="small-kicker">DIGITAL CV</p>
+          <h2 class="modal-title">Chanithu Liyanage</h2>
+        </div>
+        <button class="modal-close" id="closeCvX" type="button" aria-label="Close CV summary">
+          <svg class="icon"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+
+      <p class="modal-intro">This page is your complete CV and portfolio. Copy the summary below to use it elsewhere.</p>
+
+      <label class="modal-label">
+        <span class="sr-only">CV summary text</span>
+        <textarea id="cvText" rows="12" readonly>CHANITHU LIYANAGE
+Digital CV & Portfolio
+
+Commerce Stream | Aspiring Professional
+University of Ruhuna
+
+EDUCATION
+G.C.E. A/L 2025 - Commerce
+Loyola College, Bopitiya
+Accounting - A
+Business Studies - A
+Economics - B
+
+G.C.E. O/L 2022/2023
+Nayakakanda Archbishops College
+Maths - A | Science - A
+Commerce - A | Sinhala - A
+History - A | Health Science - A
+Religion - A | English - B | Art - C
+
+LEADERSHIP
+Senior Prefect - Archbishops College
+(2022-2023)
+Scout Troop | U19 Cricket Team
+Media Unit | Debate Team
+
+SKILLS
+Accounting | Business Studies
+Leadership | Teamwork | Communication
+
+CONTACT
+Email: chanithuwathmira@gmail.com
+GitHub: https://chanithuwathmira-glitch.github.io/
+Portfolio: https://chanithuwathmira-glitch.github.io/chanithu-portfolio/</textarea>
+      </label>
+
+      <div class="modal-buttons">
+        <button class="btn btn-primary btn-small" id="copyCv" type="button">
+          <svg class="icon"><use href="#i-copy"></use></svg>
+          <span id="copyCvLabel">Copy CV summary</span>
+        </button>
+        <a class="btn btn-outline btn-small" href="Chanithu_Liyanage_CV_Full_A4.pdf" download>Download Attached CV (PDF)</a><button class="btn btn-outline btn-small" id="closeCv" type="button">Close</button>
+      </div>
+
+      <p class="copied-msg" id="copiedMsg" hidden>
+        <svg class="icon icon-sm"><use href="#i-check"></use></svg> CV summary copied.
+      </p>
+    </div>
+  </div>
+
+  <!-- All behaviour (menu, pop-up, form) lives in script.js -->
+  <script>
+/* ===== script.js — menu / CV popup / form ===== */
+/* =========================================================
+   CHANITHU LIYANAGE — DIGITAL CV & PORTFOLIO
+   Plain JavaScript. No framework.
+
+   WHAT IS IN THIS FILE
+   1. Mobile menu (hamburger button)
+   2. CV pop-up (open / close / copy)
+   3. "Future Project" message
+   4. Contact form preview
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Helper: find an element by its id
+   --------------------------------------------------------- */
+function $(id) {
+  return document.getElementById(id);
+}
+
+
+/* =========================================================
+   1. MOBILE MENU
+   ========================================================= */
+var menuToggle = $('menuToggle');   // the hamburger button
+var navMobile  = $('navMobile');    // the menu panel
+var iconMenu   = menuToggle.querySelector('.icon-menu');    // ☰ icon
+var iconClose  = menuToggle.querySelector('.icon-close');   // ✕ icon
+
+// Open or close the mobile menu
+function setMenu(open) {
+  navMobile.hidden = !open;
+  iconMenu.toggleAttribute('hidden', open);      // (SVG icons need toggleAttribute)
+  iconClose.toggleAttribute('hidden', !open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+}
+
+// Tap the hamburger button
+menuToggle.addEventListener('click', function () {
+  setMenu(navMobile.hidden);        // if it is hidden, open it — otherwise close it
+});
+
+// Tap any link inside the mobile menu -> close the menu
+navMobile.querySelectorAll('a').forEach(function (link) {
+  link.addEventListener('click', function () {
+    setMenu(false);
+  });
+});
+
+
+/* =========================================================
+   2. CV POP-UP
+   ========================================================= */
+var cvModal     = $('cvModal');
+var cvText      = $('cvText');
+var copyCvLabel = $('copyCvLabel');
+var copiedMsg   = $('copiedMsg');
+var copyTimer   = null;             // remembers the "Copied!" timer
+var lastFocused = null;             // remembers which button opened the pop-up
+
+// Open the pop-up
+function openCv() {
+  lastFocused = document.activeElement;
+  cvModal.hidden = false;
+  document.body.style.overflow = 'hidden';   // stop the page scrolling behind it
+  $('closeCvX').focus();
+}
+
+// Close the pop-up
+function closeCv() {
+  cvModal.hidden = true;
+  document.body.style.overflow = '';
+  resetCopied();
+  if (lastFocused) lastFocused.focus();
+}
+
+// Put the copy button back to normal
+function resetCopied() {
+  clearTimeout(copyTimer);
+  copyCvLabel.textContent = 'Copy CV summary';
+  copiedMsg.hidden = true;
+}
+
+// Show "Copied!" for 2.2 seconds
+function showCopied() {
+  copyCvLabel.textContent = 'Copied!';
+  copiedMsg.hidden = false;
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(resetCopied, 2200);
+}
+
+// Buttons that open the pop-up (header + mobile menu)
+$('openCv').addEventListener('click', openCv);
+$('openCvMobile').addEventListener('click', function () {
+  setMenu(false);                   // close the mobile menu first
+  openCv();
+});
+
+// Buttons that close the pop-up
+$('closeCv').addEventListener('click', closeCv);
+$('closeCvX').addEventListener('click', closeCv);
+
+// Click on the dark area outside the box -> close
+cvModal.addEventListener('click', function (event) {
+  if (event.target === cvModal) closeCv();
+});
+
+// Press the Escape key -> close
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape' && !cvModal.hidden) closeCv();
+});
+
+// "Copy CV summary" button
+$('copyCv').addEventListener('click', function () {
+  cvText.select();
+
+  // Modern way first
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(cvText.value).then(showCopied, fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+});
+
+// Older way (works when the page is opened as a plain file)
+function fallbackCopy() {
+  try {
+    if (document.execCommand('copy')) showCopied();
+  } catch (error) {
+    copyCvLabel.textContent = 'Press Ctrl + C to copy';
+  }
+}
+
+
+/* =========================================================
+   3. "FUTURE PROJECT" MESSAGE
+   ========================================================= */
+$('futureBtn').addEventListener('click', function () {
+  $('futureNote').hidden = false;
+});
+
+
+/* =========================================================
+   4. CONTACT FORM PREVIEW
+   (This form does NOT send or store anything.)
+   ========================================================= */
+$('contactForm').addEventListener('submit', function (event) {
+  event.preventDefault();           // stop the page from reloading
+
+  var name    = $('fName').value.trim();
+  var email   = $('fEmail').value.trim();
+  var message = $('fMessage').value.trim();
+
+  var status  = $('formStatus');
+  var preview = $('previewBox');
+
+  status.hidden = false;
+
+  // Something is empty -> show a hint
+  if (!name || !email || !message) {
+    status.textContent = 'Add your name, email and message to see the preview.';
+    preview.hidden = true;
+    return;
+  }
+
+  // Everything filled in -> show the preview.
+  // textContent is used (not innerHTML) so typed text can never run as code.
+  $('pName').textContent    = name;
+  $('pEmail').textContent   = '· ' + email;
+  $('pMessage').textContent = message;
+
+  status.textContent = 'Preview only — this form does not send a message.';
+  preview.hidden = false;
+});
+
+</script>
+</body>
+</html>
