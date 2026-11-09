@@ -1340,7 +1340,83 @@ section[id] { scroll-margin-top: 5rem; }
   .hero-text .pill, .hero-title, .hero-lead, .hero-copy, .hero-buttons, .stats { animation: none; }
 }
 
-.logo-web{display:inline-flex;align-items:center;padding:.15rem .6rem;margin-left:.35rem;border-radius:999px;background:linear-gradient(135deg,#4DA6FF,#7EC0FF);color:#071A47;font-size:.78em;font-weight:800;letter-spacing:.12em;box-shadow:0 4px 14px rgba(77,166,255,.45)} .stat-sub{margin-top:.2rem;font-size:.72rem;font-weight:700;color:var(--blue-2)} .ruhuna-logo-small{width:20px;height:28px;object-fit:contain;vertical-align:-7px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:38px;object-fit:contain;border-radius:0;background:transparent;padding:0} .nav-desktop a{opacity:0;animation:navRise .7s cubic-bezier(.22,1,.36,1) both, navBubble 4.9s ease-in-out infinite} .nav-desktop a:nth-child(1){animation-delay:.15s,3.9s} .nav-desktop a:nth-child(2){animation-delay:.35s,4.25s} .nav-desktop a:nth-child(3){animation-delay:.55s,4.6s} .nav-desktop a:nth-child(4){animation-delay:.75s,4.95s} .nav-desktop a:nth-child(5){animation-delay:.95s,5.3s} .nav-desktop a:nth-child(6){animation-delay:1.15s,5.65s} .nav-desktop a:nth-child(7){animation-delay:1.35s,6s} @keyframes navRise{0%{transform:translateY(26px);opacity:0}100%{transform:translateY(0);opacity:1}} @keyframes navBubble{0%,88%,100%{transform:scale(1);text-shadow:none}92%{transform:scale(1.14);color:#fff;text-shadow:0 0 14px rgba(126,192,255,.95),0 0 28px rgba(77,166,255,.7)}96%{transform:scale(1.05)}} .nav-mobile a{animation:navRise .5s ease both} @media (prefers-reduced-motion: reduce){.nav-desktop a{animation:none!important;opacity:1}}.ruhuna-logo-strip{width:auto;height:44px;flex-shrink:0;object-fit:contain;vertical-align:middle;margin-right:.6rem;background:transparent;border-radius:0;padding:0;display:inline-block} .ruhuna-logo-small{width:22px;height:31px;object-fit:contain;vertical-align:-8px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:39px;object-fit:contain;border-radius:0;background:transparent;padding:0}.hero-strip{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;overflow:visible} .hero-strip-left{display:flex;align-items:center;gap:.5rem;overflow:visible;min-width:0} .hero-strip-left img{flex-shrink:0} </style>
+.logo-web{display:inline-flex;align-items:center;padding:.15rem .6rem;margin-left:.35rem;border-radius:999px;background:linear-gradient(135deg,#4DA6FF,#7EC0FF);color:#071A47;font-size:.78em;font-weight:800;letter-spacing:.12em;box-shadow:0 4px 14px rgba(77,166,255,.45)} .stat-sub{margin-top:.2rem;font-size:.72rem;font-weight:700;color:var(--blue-2)} .ruhuna-logo-small{width:20px;height:28px;object-fit:contain;vertical-align:-7px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:38px;object-fit:contain;border-radius:0;background:transparent;padding:0} .nav-desktop a{opacity:0;animation:navRise .7s cubic-bezier(.22,1,.36,1) both, navBubble 4.9s ease-in-out infinite} .nav-desktop a:nth-child(1){animation-delay:.15s,3.9s} .nav-desktop a:nth-child(2){animation-delay:.35s,4.25s} .nav-desktop a:nth-child(3){animation-delay:.55s,4.6s} .nav-desktop a:nth-child(4){animation-delay:.75s,4.95s} .nav-desktop a:nth-child(5){animation-delay:.95s,5.3s} .nav-desktop a:nth-child(6){animation-delay:1.15s,5.65s} .nav-desktop a:nth-child(7){animation-delay:1.35s,6s} @keyframes navRise{0%{transform:translateY(26px);opacity:0}100%{transform:translateY(0);opacity:1}} @keyframes navBubble{0%,88%,100%{transform:scale(1);text-shadow:none}92%{transform:scale(1.14);color:#fff;text-shadow:0 0 14px rgba(126,192,255,.95),0 0 28px rgba(77,166,255,.7)}96%{transform:scale(1.05)}} .nav-mobile a{animation:navRise .5s ease both} @media (prefers-reduced-motion: reduce){.nav-desktop a{animation:none!important;opacity:1}}.ruhuna-logo-strip{width:auto;height:44px;flex-shrink:0;object-fit:contain;vertical-align:middle;margin-right:.6rem;background:transparent;border-radius:0;padding:0;display:inline-block} .ruhuna-logo-small{width:22px;height:31px;object-fit:contain;vertical-align:-8px;margin-right:.4rem;border-radius:0;background:transparent;padding:0;display:inline-block} .ruhuna-logo-inline{width:28px;height:39px;object-fit:contain;border-radius:0;background:transparent;padding:0}.hero-strip{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;overflow:visible} .hero-strip-left{display:flex;align-items:center;gap:.5rem;overflow:visible;min-width:0} .hero-strip-left img{flex-shrink:0} 
+/* ===== ABOUT presentation: Home -> About, 4 steps, plays on scroll / nav click ===== */
+#about .glance, #about .glance-item, #about .about-text p, #about .tags .tag{opacity:0}
+#about.about-play .glance{animation:aboutGlanceIn 1s cubic-bezier(.22,1,.36,1) .1s both}
+@keyframes aboutGlanceIn{0%{transform:scale(.82) translateY(26px);opacity:0;background:rgba(13,46,119,.25)}60%{opacity:.7}100%{transform:scale(1) translateY(0);opacity:1;background:var(--card)}}
+/* Step 2 - glance details fill top to bottom. Labels stay visible early, values fill in */
+#about.about-play .glance-item{animation:aboutFadeUp .55s ease both}
+#about.about-play .glance-item:nth-child(1){animation-delay:.7s}
+#about.about-play .glance-item:nth-child(2){animation-delay:.88s}
+#about.about-play .glance-item:nth-child(3){animation-delay:1.06s}
+#about.about-play .glance-item:nth-child(4){animation-delay:1.24s}
+#about.about-play .glance-item:nth-child(5){animation-delay:1.42s}
+#about.about-play .glance .link-accent{animation:aboutFadeUp .55s ease 1.6s both}
+@keyframes aboutFadeUp{0%{transform:translateY(14px);opacity:0}100%{transform:translateY(0);opacity:1}}
+/* Step 2b - VALUES fill top to bottom - this was the missing part */
+#about.about-play .glance-item dd{animation:aboutValueFill .55s ease both}
+#about.about-play .glance-item:nth-child(1) dd{animation-delay:.85s}
+#about.about-play .glance-item:nth-child(2) dd{animation-delay:1.03s}
+#about.about-play .glance-item:nth-child(3) dd{animation-delay:1.21s}
+#about.about-play .glance-item:nth-child(4) dd{animation-delay:1.39s}
+#about.about-play .glance-item:nth-child(5) dd{animation-delay:1.57s}
+@keyframes aboutValueFill{0%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:1}}
+/* Step 3 - summary text slides OUT of the glance box, right -> left. Heading stays still */
+#about.about-play .about-text p{animation:aboutSlideFromGlance .8s cubic-bezier(.22,1,.36,1) both}
+#about.about-play .about-text p:nth-child(1){animation-delay:1.85s}
+#about.about-play .about-text p:nth-child(2){animation-delay:2.15s}
+#about.about-play .about-text p:nth-child(3){animation-delay:2.45s}
+@keyframes aboutSlideFromGlance{0%{transform:translateX(70px);opacity:0}100%{transform:translateX(0);opacity:1}}
+/* Step 4 - tags appear like magic, one by one */
+#about.about-play .tags .tag{animation:aboutTagMagic .6s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 rgba(77,166,255,0)}
+#about.about-play .tags .tag:nth-child(1){animation-delay:2.95s}
+#about.about-play .tags .tag:nth-child(2){animation-delay:3.15s}
+#about.about-play .tags .tag:nth-child(3){animation-delay:3.35s}
+#about.about-play .tags .tag:nth-child(4){animation-delay:3.55s}
+#about.about-play .tags .tag:nth-child(5){animation-delay:3.75s}
+@keyframes aboutTagMagic{0%{transform:scale(.4) rotate(-6deg);opacity:0;filter:blur(6px);box-shadow:0 0 22px rgba(77,166,255,.7)}70%{transform:scale(1.12) rotate(2deg);opacity:1;filter:blur(0)}100%{transform:scale(1) rotate(0);opacity:1;filter:blur(0);box-shadow:0 0 0 rgba(77,166,255,0)}}
+@media (prefers-reduced-motion: reduce){#about .glance,#about .glance-item,#about .about-text p,#about .tags .tag,#about .glance .link-accent{animation:none!important;opacity:1;transform:none;filter:none}}
+
+/* School logos - Loyola + Archbishops */
+.school-logo{height:30px;width:auto;object-fit:contain;vertical-align:middle;margin-right:.5rem;background:transparent;border-radius:0;flex-shrink:0}
+.panel-head .school-logo{height:36px}
+.glance-item dd .school-logo{height:28px}
+
+/* ===== EDUCATION: A-grade shine + golden star, left -> right, then gone ===== */
+.subject-card, .ol-item{position:relative;overflow:hidden}
+.subject-card.is-a::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,215,130,.55) 45%,rgba(255,255,255,.9) 50%,rgba(255,215,130,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
+.subject-card.is-a::after{content:"\2605";position:absolute;top:.55rem;right:.7rem;font-size:1.35rem;color:#FFD76A;text-shadow:0 0 12px rgba(255,215,0,.9),0 0 26px rgba(255,215,0,.55);transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0;pointer-events:none}
+#education.education-play .subject-card.is-a::before{animation:eduShine 1.1s ease .3s both}
+#education.education-play .subject-card.is-a:nth-child(2)::before{animation-delay:.55s}
+#education.education-play .subject-card.is-a::after{animation:eduStar 1.1s ease .3s both}
+#education.education-play .subject-card.is-a:nth-child(2)::after{animation-delay:.55s}
+@keyframes eduShine{0%{transform:translateX(-120%);opacity:0}25%{opacity:1}100%{transform:translateX(120%);opacity:0}}
+@keyframes eduStar{0%{transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0}30%{opacity:1;transform:translateX(-80px) scale(1.25) rotate(10deg)}70%{opacity:1}100%{transform:translateX(60px) scale(.8) rotate(20deg);opacity:0}}
+/* OL: same hover lift + lighten as AL cards (was missing before) */
+.ol-item{transition:transform .3s ease,background .3s ease,border-color .3s ease}
+.ol-item:hover{transform:translateY(-4px);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+/* PDF buttons */
+.pdf-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;padding:.65rem 1.1rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:#fff;font-weight:700;font-size:.85rem;text-decoration:none}
+.pdf-link:hover{background:rgba(255,255,255,.14)}
+.glance .pdf-link{margin-top:.9rem;font-size:.8rem}
+
+/* OL A-grade: SAME golden shine + star as AL (added now, nothing else changed) */
+.ol-item.is-a::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,215,130,.55) 45%,rgba(255,255,255,.9) 50%,rgba(255,215,130,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
+.ol-item.is-a::after{content:"\2605";position:absolute;top:50%;right:.6rem;transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg);font-size:1.1rem;color:#FFD76A;text-shadow:0 0 12px rgba(255,215,0,.9),0 0 26px rgba(255,215,0,.55);opacity:0;pointer-events:none}
+#education.education-play .ol-item.is-a::before{animation:eduShine 1.1s ease both}
+#education.education-play .ol-item.is-a::after{animation:eduStarOL 1.1s ease both}
+#education.education-play .ol-item.is-a:nth-child(1)::before,#education.education-play .ol-item.is-a:nth-child(1)::after{animation-delay:.3s}
+#education.education-play .ol-item.is-a:nth-child(2)::before,#education.education-play .ol-item.is-a:nth-child(2)::after{animation-delay:.45s}
+#education.education-play .ol-item.is-a:nth-child(3)::before,#education.education-play .ol-item.is-a:nth-child(3)::after{animation-delay:.6s}
+#education.education-play .ol-item.is-a:nth-child(4)::before,#education.education-play .ol-item.is-a:nth-child(4)::after{animation-delay:.75s}
+#education.education-play .ol-item.is-a:nth-child(5)::before,#education.education-play .ol-item.is-a:nth-child(5)::after{animation-delay:.9s}
+#education.education-play .ol-item.is-a:nth-child(6)::before,#education.education-play .ol-item.is-a:nth-child(6)::after{animation-delay:1.05s}
+#education.education-play .ol-item.is-a:nth-child(7)::before,#education.education-play .ol-item.is-a:nth-child(7)::after{animation-delay:1.2s}
+#education.education-play .ol-item.is-a:nth-child(8)::before,#education.education-play .ol-item.is-a:nth-child(8)::after{animation-delay:1.35s}
+#education.education-play .ol-item.is-a:nth-child(9)::before,#education.education-play .ol-item.is-a:nth-child(9)::after{animation-delay:1.5s}
+@keyframes eduStarOL{0%{transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg);opacity:0}30%{opacity:1;transform:translateY(-50%) translateX(-60px) scale(1.25) rotate(10deg)}70%{opacity:1}100%{transform:translateY(-50%) translateX(40px) scale(.8) rotate(20deg);opacity:0}}
+</style>
 </head>
 <body>
 <!-- =====================================================================
@@ -1566,7 +1642,7 @@ section[id] { scroll-margin-top: 5rem; }
             </div>
             <div class="glance-item">
               <dt>School</dt>
-              <dd>Loyola College, Bopitiya</dd>
+              <dd><img class="school-logo" src="loyola-college-bopitiya-logo.png" alt="Loyola College logo"> Loyola College, Bopitiya</dd>
             </div>
             <div class="glance-item">
               <dt>A / L 2025</dt>
@@ -1580,6 +1656,8 @@ section[id] { scroll-margin-top: 5rem; }
           <a href="#contact" class="link-accent">
             Get in touch <svg class="icon"><use href="#i-arrow"></use></svg>
           </a>
+          <br>
+          <a class="pdf-link" href="UGC-selection-certificate.pdf" target="_blank" rel="noopener">🎓 View Campus Selection Letter (PDF)</a>
         </aside>
       </div>
     </section>
@@ -1605,18 +1683,18 @@ section[id] { scroll-margin-top: 5rem; }
             <div>
               <p class="small-kicker">G.C.E. ADVANCED LEVEL • 2025</p>
               <h3 class="panel-title">Commerce Stream</h3>
-              <p class="muted">Loyola College, Bopitiya</p>
+              <p class="muted"><img class="school-logo" src="loyola-college-bopitiya-logo.png" alt="Loyola College logo"> Loyola College, Bopitiya</p>
             </div>
             <span class="badge badge-blue">2 A’s · 1 B</span>
           </div>
 
           <div class="al-grid">
-            <article class="subject-card card-hover">
+            <article class="subject-card card-hover is-a">
               <p class="grade-big">A</p>
               <h4>Accounting</h4>
               <p class="muted small">Commerce Stream</p>
             </article>
-            <article class="subject-card card-hover">
+            <article class="subject-card card-hover is-a">
               <p class="grade-big">A</p>
               <h4>Business Studies</h4>
               <p class="muted small">Commerce Stream</p>
@@ -1627,6 +1705,7 @@ section[id] { scroll-margin-top: 5rem; }
               <p class="muted small">Commerce Stream</p>
             </article>
           </div>
+          <a class="pdf-link" href="AL-Resalt-Sheet.pdf" target="_blank" rel="noopener">📄 View A/L Result Sheet (PDF)</a>
         </div>
 
         <!-- Ordinary Level box.
@@ -1636,20 +1715,20 @@ section[id] { scroll-margin-top: 5rem; }
             <div>
               <p class="small-kicker">G.C.E. ORDINARY LEVEL • 2022 / 2023</p>
               <h3 class="panel-title">Nine subjects</h3>
-              <p class="muted">Nayakakanda Archbishops College</p>
+              <p class="muted"><img class="school-logo" src="Archbishops-collage-logo.jpg" alt="Archbishops College logo"> Nayakakanda Archbishops College</p>
             </div>
             <span class="badge badge-outline">7 A’s · 1 B · 1 C</span>
           </div>
 
           <div class="ol-grid">
-            <div class="ol-item"><span>Mathematics</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>Science</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Mathematics</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Science</span><span class="grade grade-a">A</span></div>
             <div class="ol-item"><span>English</span><span class="grade grade-b">B</span></div>
-            <div class="ol-item"><span>Commerce</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>Sinhala</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>History</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>Health Science</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>Religion</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Commerce</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Sinhala</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>History</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Health Science</span><span class="grade grade-a">A</span></div>
+            <div class="ol-item is-a"><span>Religion</span><span class="grade grade-a">A</span></div>
             <div class="ol-item"><span>Art</span><span class="grade grade-c">C</span></div>
           </div>
         </div>
@@ -2265,6 +2344,26 @@ $('contactForm').addEventListener('submit', function (event) {
   preview.hidden = false;
 });
 
+
+/* About presentation - play when About comes into view, replay on About nav click */
+(function(){
+  var about=document.getElementById('about'); if(!about) return;
+  function play(){ about.classList.remove('about-play'); void about.offsetWidth; about.classList.add('about-play'); }
+  var seen=false;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.25});
+  io.observe(about);
+  document.querySelectorAll('a[href="#about"]').forEach(function(a){ a.addEventListener('click', function(){ seen=true; setTimeout(play, 80); }); });
+})();
+
+/* Education A-grade shine+star - play on scroll into view, replay on Education nav click */
+(function(){
+  var edu=document.getElementById('education'); if(!edu) return;
+  function play(){ edu.classList.remove('education-play'); void edu.offsetWidth; edu.classList.add('education-play'); }
+  var seen=false;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.25});
+  io.observe(edu);
+  document.querySelectorAll('a[href="#education"]').forEach(function(a){ a.addEventListener('click', function(){ seen=true; setTimeout(play, 80); }); });
+})();
 </script>
 </body>
 </html>
