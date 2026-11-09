@@ -1,59 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:image" content="profile.jpeg">
-<title>Chanithu Liyanage - Digital CV</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#071A47;--blue:#4DA6FF;--card:#0D2E77;--muted:#C6D7F5;--line:rgba(255,255,255,.14)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:'Manrope',sans-serif;line-height:1.5}
-h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0}.c{max-width:1100px;margin:auto;padding:0 16px}
-header{position:sticky;top:0;background:rgba(7,26,71,.9);border-bottom:1px solid var(--line);z-index:10}
-header .c{display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
-nav a{margin-left:16px;color:var(--muted);font-size:14px}nav a:hover{color:#fff}
-.hero{padding:70px 0;display:grid;gap:30px;align-items:center}
-@media(min-width:850px){.hero{grid-template-columns:1.1fr .9fr}}
-.hero h1{font-size:44px;line-height:1.05}.hero p{color:var(--muted)}
-.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;margin-top:16px}
-.btn1{background:var(--blue);color:#071A47}.btn2{border:1px solid #fff;margin-left:8px}
-img.profile{width:320px;height:320px;object-fit:cover;border-radius:24px;border:2px solid var(--line);display:block}
-section{padding:50px 0}.alt{background:#081E52}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:14px}
-.badge{display:inline-block;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);margin:4px;font-size:13px}
-footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--line)}
-</style>
-</head>
-<body>
-<header><div class="c"><b>Chanithu Liyanage</b><nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav></div></header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="cover.jpg">
+  <meta property="og:title" content="Chanithu Liyanage — Digital CV">
+  <title>Chanithu Liyanage — Digital CV & Portfolio</title>
 
-<main class="c">
-<div class="hero">
-<div>
-<p style="color:#7EC0FF;font-weight:800;font-size:12px;letter-spacing:2px">DIGITAL CV • LIVE</p>
-<h1>Building digital experiences that matter.</h1>
-<p>I'm <b>Chanithu Liyanage</b> - student, creator and aspiring developer from Sri Lanka. I love clean design and simple code.</p>
-<a class="btn btn1" href="#projects">View Projects</a>
-<a class="btn btn2" href="#contact">Contact Me</a>
-</div>
-<!-- Photo එක මෙතනින් එන්නේ -->
-<img class="profile" src="profile.jpeg" alt="Chanithu Liyanage">
-</div>
+  <!-- Fonts (Google Fonts). Remove these 3 lines to use system fonts only. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-<section id="about"><h2>About Me</h2><div class="card"><p>I'm a passionate learner focused on technology, leadership and community impact. Edit this text with your story.</p></div></section>
+  <!-- All styling lives in style.css -->
+  <style>
+/* ===== style.css — ඔක්කොම මෙතන. පාට වෙනස් කරන්න නම් :root එකේ බලන්න ===== */
+/* =========================================================
+   CHANITHU LIYANAGE — DIGITAL CV & PORTFOLIO
+   Plain CSS. No framework.
 
-<section id="education"><h2>Education</h2><div class="card"><h3>Your School / University</h3><p style="color:var(--muted)">2022 - Present • Edit this</p></div></section>
+   HOW THIS FILE IS ORGANISED
+   1.  Colours & settings (change colours HERE)
+   2.  Basic reset
+   3.  Shared pieces (buttons, badges, icons, cards)
+   4.  Header & navigation
+   5.  Hero (top section)
+   6.  About
+   7.  Education
+   8.  Leadership
+   9.  Skills
+   10. Projects
+   11. Contact
+   12. Footer
+   13. CV pop-up
+   14. Small helpers
+   ========================================================= */
 
-<section id="skills"><h2>Skills</h2><div style="margin-top:12px"><span class="badge">HTML / CSS</span><span class="badge">JavaScript</span><span class="badge">UI/UX</span><span class="badge">GitHub</span><span class="badge">Leadership</span></div></section>
 
-<section id="projects"><h2>Projects</h2>
-<div class="card"><h3>Project One</h3><p style="color:var(--muted)">Describe your project here.</p></div>
-<div class="card"><h3>Project Two</h3><p style="color:var(--muted)">Describe your project here.</p></div>
-</section>
+/* =========================================================
+   1. COLOURS & SETTINGS
+   Change a colour here and it changes everywhere.
+   ========================================================= */
+:root {
+  --bg:       #071A47;   /* main page background (dark navy)   */
+  --navy:     #0A2463;   /* slightly lighter navy              */
+  --alt-bg:   #081E52;   /* background of every second section */
+  --blue:     #4DA6FF;   /* main accent colour                 */
+  --blue-2:   #7EC0FF;   /* lighter accent                     */
+  --ink:      #FFFFFF;   /* main text colour                   */
+  --muted:    #C6D7F5;   /* softer text colour                 */
+  --muted-2:  #8EA9D6;   /* smallest labels                    */
+  --line:     rgba(255, 255, 255, .14);   /* thin border lines */
+  --card:     #0D2E77;   /* card background                    */
+  --card-hover: #123A8A; /* card background when hovered       */
+  --green:    #6EE7B7;   /* "LIVE" / "copied" green            */
 
-<section id="contact"><h2>Contact</h2><div class="card"><p>Email: <b>your.email@example.com</b> - Edit this</p><p style="color:var(--muted)">Replace with your real email, LinkedIn, GitHub</p></div></section>
-</main>
-<footer>© 2026 Chanithu Liyanage • Clean HTML • No Framework</footer>
-</body>
-</html>
+  color-scheme: dark;
+}
+
+
+/* =========================================================
+   2. BASIC RESET
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;           /* smooth scrolling for menu links */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  overflow-x: clip;                  /* stops sideways scrolling on phones */
+}
+
+/* Headings use the second font */
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  letter-spacing: -.02em;
+}
+
+p, dl, dd { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button { cursor: pointer; }
+
+svg { display: block; }
+
+/* The "hidden" attribute must always win (used by script.js) */
+[hidden] { display: none !important; }
+
+/* Highlighted text colour */
+::selection {
+  background: var(--blue);
+  color: #071A47;
+}
+
+/* Keyboard focus ring (accessibility) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--blue-2);
+  outline-offset: 3px;
+}
+
+/* Jump-to-section links stop below the sticky header */
+section[id] { scroll-margin-top: 5rem; }
+
+/* Centred page width used by every section */
+.container {
+  max-width: 80rem;                  /* 1280px */
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px)  { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .container { padding-left: 2rem;   padding-right: 2rem;   } }
+
+
+/* =========================================================
+   3. SHARED PIECES
+   ========================================================= */
+
+/* ---- Icons ---- */
+.icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
