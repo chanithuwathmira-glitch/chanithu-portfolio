@@ -1398,13 +1398,6 @@ body.hero-strip-in .hero-strip { transform: translateX(0); opacity: 1; }
 #about.about-play .tags .tag:nth-child(4){animation-delay:3.55s}
 #about.about-play .tags .tag:nth-child(5){animation-delay:3.75s}
 @keyframes aboutTagMagic{0%{transform:scale(.4) rotate(-6deg);opacity:0;filter:blur(6px);box-shadow:0 0 22px rgba(77,166,255,.7)}70%{transform:scale(1.12) rotate(2deg);opacity:1;filter:blur(0)}100%{transform:scale(1) rotate(0);opacity:1;filter:blur(0);box-shadow:0 0 0 rgba(77,166,255,0)}}
-/* ABOUT scroll mode: when scrolled in (not nav-click), the 3 paragraphs start entering as soon as the text itself reaches the screen — no waiting for the glance sequence. Nav-click keeps the normal full presentation. */
-/* Scroll mode (FIX): these delays use !important so they really beat the nav-mode delays (1.85s+) — before, the nav delays won and the text arrived late. */
-/* Order stays the same: AT A GLANCE comes first (normal, via about-play), then the summary slides in toward the LEFT, like the presentation. */
-#about.about-text-in .about-text p{animation:aboutSlideFromGlance .7s cubic-bezier(.22,1,.36,1) both}
-#about.about-text-in .about-text p:nth-child(1){animation-delay:.05s !important}
-#about.about-text-in .about-text p:nth-child(2){animation-delay:.2s !important}
-#about.about-text-in .about-text p:nth-child(3){animation-delay:.35s !important}
 @media (prefers-reduced-motion: reduce){#about .glance,#about .glance-item,#about .about-text p,#about .tags .tag,#about .glance .link-accent{animation:none!important;opacity:1;transform:none;filter:none}}
 
 /* School logos - Loyola + Archbishops */
@@ -2430,10 +2423,7 @@ $('contactForm').addEventListener('submit', function (event) {
   var seen=false;
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.25});
   io.observe(about);
-  document.querySelectorAll('a[href="#about"]').forEach(function(a){ a.addEventListener('click', function(){ window.__aboutNavClick=true; about.classList.remove('about-text-in'); seen=true; setTimeout(play, 80); setTimeout(function(){ window.__aboutNavClick=false; }, 4500); }); });
-  // Scroll mode: text enters as soon as IT reaches ~half the screen (nav-click mode skips this)
-  var atxt=about.querySelector('.about-text');
-  if(atxt) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !window.__aboutNavClick){ about.classList.add('about-text-in'); } }); }, {rootMargin:'-45% 0px -45% 0px', threshold:0}).observe(atxt);
+  document.querySelectorAll('a[href="#about"]').forEach(function(a){ a.addEventListener('click', function(){ seen=true; setTimeout(play, 80); }); });
 })();
 
 /* HERO STRIP: first mouse-scroll DOWN only -> right to left, 3s */
