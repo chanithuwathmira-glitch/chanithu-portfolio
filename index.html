@@ -648,8 +648,11 @@ section[id] { scroll-margin-top: 5rem; }
   white-space: normal;
 }
 
-/* Strip under the hero */
-.hero-strip-wrap { padding-bottom: 2rem; }
+/* Strip under the hero — starts off-screen right, slides in on FIRST scroll down, 3s */
+.hero-strip-wrap { padding-bottom: 2rem; overflow: clip; }
+.hero-strip { transform: translateX(110%); opacity: 0; transition: transform 3s cubic-bezier(.22, 1, .36, 1), opacity 1.6s ease; will-change: transform; }
+body.hero-strip-in .hero-strip { transform: translateX(0); opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .hero-strip { transition: none; transform: none; opacity: 1; } }
 .hero-strip {
   display: flex;
   flex-direction: column;
@@ -948,19 +951,25 @@ section[id] { scroll-margin-top: 5rem; }
   color: var(--blue-2);
 }
 
-/* Progress bar: the inner <div> width is set in the HTML */
-.progress {
-  height: .5rem;
-  margin-top: 1rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .14);
-}
-.progress > div {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #4DA6FF, #7EC0FF);
-}
+/* SKILLS: ring (NOT a pie chart) — thin circular ring that fills with colour.
+   Logo + title + description + % all sit INSIDE the ring. Presentation-style entrance. */
+.skill-card{display:grid;place-items:center;padding:1.75rem 1rem}
+.skill-ring{position:relative;width:210px;height:210px}
+.skill-ring-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.skill-ring-track{fill:none;stroke:rgba(255,255,255,.14);stroke-width:11}
+.skill-ring-fill{fill:none;stroke:url(#skillGrad);stroke:#4DA6FF;stroke-width:11;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:502.65;transition:stroke-dashoffset 2.2s cubic-bezier(.22,1,.36,1);filter:drop-shadow(0 0 8px rgba(77,166,255,.7))}
+.skill-ring-dot{display:none}
+.skill-grid.skill-play .skill-ring-fill{stroke-dashoffset:var(--ring-off,502.65)}
+
+.skill-ring-in{position:absolute;inset:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.3rem;opacity:0;transform:translateY(14px) scale(.94);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.skill-grid.skill-play .skill-ring-in{opacity:1;transform:none}
+.skill-ring-in .icon-box{width:44px;height:44px}
+.skill-ring-in h3{font-size:1rem;line-height:1.25}
+.skill-ring-in .muted{font-size:.78rem;line-height:1.35}
+.skill-ring-in .skill-percent{margin-top:.15rem;font-size:1.5rem;font-weight:800;color:var(--blue-2);font-family:'Space Grotesk',sans-serif}
+.skill-card:hover .skill-ring-fill{filter:drop-shadow(0 0 14px rgba(77,166,255,.95))}
+.skill-card:hover{transform:translateY(-4px)}
+.skill-card{transition:transform .3s ease}
 
 
 /* =========================================================
@@ -999,6 +1008,14 @@ section[id] { scroll-margin-top: 5rem; }
   border-radius: 1.5rem;
   background: var(--card);
 }
+/* PROJECTS: white shadow that runs AROUND the frame, OUTSIDE the card — Google AI-mode style, but WHITE. */
+/* Nothing inside the card glows. ::before = bright white border-ring at the mouse side. */
+/* ::after = soft white shadow UNDER the frame, offset toward the mouse. Existing card-hover lift kept. */
+.project-card{position:relative;--mx:50%;--my:50%}
+.project-spot::before{content:"";position:absolute;inset:-4px;border-radius:1.8rem;padding:3px;pointer-events:none;z-index:2;opacity:0;transition:opacity .35s ease;background:radial-gradient(240px circle at var(--mx) var(--my),rgba(240,240,245,.98),rgba(192,192,205,.55) 42%,rgba(160,160,175,.15) 58%,transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.project-spot:hover::before,.project-spot.is-sweep::before{opacity:1}
+
+.project-spot{transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .35s ease}
 .project-card-current { border-color: rgba(77, 166, 255, .5); }
 .project-card-soon {
   border: 1px dashed rgba(255, 255, 255, .2);
@@ -1074,6 +1091,11 @@ section[id] { scroll-margin-top: 5rem; }
   align-content: start;
   gap: 1rem;
 }
+#contact.contact-play .contact-item{animation:contactFadeUp .6s cubic-bezier(.22,1,.36,1) both}
+#contact.contact-play .contact-item:nth-child(2){animation-delay:.1s}
+#contact.contact-play .contact-item:nth-child(3){animation-delay:.2s}
+#contact.contact-play .contact-item:nth-child(4){animation-delay:.3s}
+@keyframes contactFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .contact-item {
   display: flex;
   align-items: center;
@@ -1376,6 +1398,13 @@ section[id] { scroll-margin-top: 5rem; }
 #about.about-play .tags .tag:nth-child(4){animation-delay:3.55s}
 #about.about-play .tags .tag:nth-child(5){animation-delay:3.75s}
 @keyframes aboutTagMagic{0%{transform:scale(.4) rotate(-6deg);opacity:0;filter:blur(6px);box-shadow:0 0 22px rgba(77,166,255,.7)}70%{transform:scale(1.12) rotate(2deg);opacity:1;filter:blur(0)}100%{transform:scale(1) rotate(0);opacity:1;filter:blur(0);box-shadow:0 0 0 rgba(77,166,255,0)}}
+/* ABOUT scroll mode: when scrolled in (not nav-click), the 3 paragraphs start entering as soon as the text itself reaches the screen — no waiting for the glance sequence. Nav-click keeps the normal full presentation. */
+/* Scroll mode (FIX): these delays use !important so they really beat the nav-mode delays (1.85s+) — before, the nav delays won and the text arrived late. */
+/* Order stays the same: AT A GLANCE comes first (normal, via about-play), then the summary slides in toward the LEFT, like the presentation. */
+#about.about-text-in .about-text p{animation:aboutSlideFromGlance .7s cubic-bezier(.22,1,.36,1) both}
+#about.about-text-in .about-text p:nth-child(1){animation-delay:.05s !important}
+#about.about-text-in .about-text p:nth-child(2){animation-delay:.2s !important}
+#about.about-text-in .about-text p:nth-child(3){animation-delay:.35s !important}
 @media (prefers-reduced-motion: reduce){#about .glance,#about .glance-item,#about .about-text p,#about .tags .tag,#about .glance .link-accent{animation:none!important;opacity:1;transform:none;filter:none}}
 
 /* School logos - Loyola + Archbishops */
@@ -1383,39 +1412,95 @@ section[id] { scroll-margin-top: 5rem; }
 .panel-head .school-logo{height:36px}
 .glance-item dd .school-logo{height:28px}
 
-/* ===== EDUCATION: A-grade shine + golden star, left -> right, then gone ===== */
+/* ===== EDUCATION: medal shine + star ===== */
+/* A/L: A-set + Silver B TOGETHER at the same time, smooth (B delay = gold delay). Replays EVERY time A/L reaches centre. */
+/* O/L: ALL grades TOGETHER at the same time. Replays EVERY time O/L reaches centre, like A/L. If A/L+O/L are both on screen, both play. */
+/* Hover / select animation untouched. */
 .subject-card, .ol-item{position:relative;overflow:hidden}
-.subject-card.is-a::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,215,130,.55) 45%,rgba(255,255,255,.9) 50%,rgba(255,215,130,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
-.subject-card.is-a::after{content:"\2605";position:absolute;top:.55rem;right:.7rem;font-size:1.35rem;color:#FFD76A;text-shadow:0 0 12px rgba(255,215,0,.9),0 0 26px rgba(255,215,0,.55);transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0;pointer-events:none}
-#education.education-play .subject-card.is-a::before{animation:eduShine 1.1s ease .3s both}
-#education.education-play .subject-card.is-a:nth-child(2)::before{animation-delay:.55s}
-#education.education-play .subject-card.is-a::after{animation:eduStar 1.1s ease .3s both}
-#education.education-play .subject-card.is-a:nth-child(2)::after{animation-delay:.55s}
+.subject-card.is-a::before,.ol-item.is-a::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,215,130,.55) 45%,rgba(255,255,255,.95) 50%,rgba(255,215,130,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
+.subject-card.is-b::before,.ol-item.is-b::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(210,220,235,.55) 45%,rgba(255,255,255,.95) 50%,rgba(210,220,235,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
+.subject-card.is-c::before,.ol-item.is-c::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(205,127,50,.6) 45%,rgba(255,220,180,.95) 50%,rgba(205,127,50,.6) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
+.subject-card.is-a::after,.ol-item.is-a::after{content:"\2605";position:absolute;top:.55rem;right:.7rem;font-size:1.35rem;color:#FFD76A;text-shadow:0 0 12px rgba(255,215,0,.9),0 0 26px rgba(255,215,0,.55);transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0;pointer-events:none}
+.subject-card.is-b::after,.ol-item.is-b::after{content:"\2605";position:absolute;top:.55rem;right:.7rem;font-size:1.35rem;color:#E8EEF7;text-shadow:0 0 12px rgba(220,230,245,.95),0 0 26px rgba(180,200,225,.6);transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0;pointer-events:none}
+.subject-card.is-c::after,.ol-item.is-c::after{content:"\2605";position:absolute;top:.55rem;right:.7rem;font-size:1.35rem;color:#E8A05C;text-shadow:0 0 12px rgba(205,127,50,.95),0 0 26px rgba(205,127,50,.55);transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0;pointer-events:none}
+.ol-item.is-a::after,.ol-item.is-b::after,.ol-item.is-c::after{top:50%;right:.6rem;font-size:1.1rem;transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg)}
+/* A/L */
+.al-grid.al-play .subject-card.is-a::before{animation:eduShine 2.2s ease .2s both}
+.al-grid.al-play .subject-card.is-a::after{animation:eduStar 2.2s ease .2s both}
+.al-grid.al-play .subject-card.is-b::before{animation:eduShine 2.2s ease .2s both}
+.al-grid.al-play .subject-card.is-b::after{animation:eduStar 2.2s ease .2s both}
+/* O/L — ALL at once, same delay, slow */
+.ol-grid.ol-play .ol-item::before{animation:eduShine 2.4s ease .2s both}
+.ol-grid.ol-play .ol-item::after{animation:eduStarOL 2.4s ease .2s both}
 @keyframes eduShine{0%{transform:translateX(-120%);opacity:0}25%{opacity:1}100%{transform:translateX(120%);opacity:0}}
 @keyframes eduStar{0%{transform:translateX(-260px) scale(.4) rotate(-30deg);opacity:0}30%{opacity:1;transform:translateX(-80px) scale(1.25) rotate(10deg)}70%{opacity:1}100%{transform:translateX(60px) scale(.8) rotate(20deg);opacity:0}}
-/* OL: same hover lift + lighten as AL cards (was missing before) */
+@keyframes eduStarOL{0%{transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg);opacity:0}30%{opacity:1;transform:translateY(-50%) translateX(-60px) scale(1.25) rotate(10deg)}70%{opacity:1}100%{transform:translateY(-50%) translateX(40px) scale(.8) rotate(20deg);opacity:0}}
+/* OL hover (as before) */
 .ol-item{transition:transform .3s ease,background .3s ease,border-color .3s ease}
 .ol-item:hover{transform:translateY(-4px);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
-/* PDF buttons */
 .pdf-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;padding:.65rem 1.1rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:#fff;font-weight:700;font-size:.85rem;text-decoration:none}
 .pdf-link:hover{background:rgba(255,255,255,.14)}
 .glance .pdf-link{margin-top:.9rem;font-size:.8rem}
 
-/* OL A-grade: SAME golden shine + star as AL (added now, nothing else changed) */
-.ol-item.is-a::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,215,130,.55) 45%,rgba(255,255,255,.9) 50%,rgba(255,215,130,.55) 55%,transparent 80%);transform:translateX(-120%);opacity:0;pointer-events:none}
-.ol-item.is-a::after{content:"\2605";position:absolute;top:50%;right:.6rem;transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg);font-size:1.1rem;color:#FFD76A;text-shadow:0 0 12px rgba(255,215,0,.9),0 0 26px rgba(255,215,0,.55);opacity:0;pointer-events:none}
-#education.education-play .ol-item.is-a::before{animation:eduShine 1.1s ease both}
-#education.education-play .ol-item.is-a::after{animation:eduStarOL 1.1s ease both}
-#education.education-play .ol-item.is-a:nth-child(1)::before,#education.education-play .ol-item.is-a:nth-child(1)::after{animation-delay:.3s}
-#education.education-play .ol-item.is-a:nth-child(2)::before,#education.education-play .ol-item.is-a:nth-child(2)::after{animation-delay:.45s}
-#education.education-play .ol-item.is-a:nth-child(3)::before,#education.education-play .ol-item.is-a:nth-child(3)::after{animation-delay:.6s}
-#education.education-play .ol-item.is-a:nth-child(4)::before,#education.education-play .ol-item.is-a:nth-child(4)::after{animation-delay:.75s}
-#education.education-play .ol-item.is-a:nth-child(5)::before,#education.education-play .ol-item.is-a:nth-child(5)::after{animation-delay:.9s}
-#education.education-play .ol-item.is-a:nth-child(6)::before,#education.education-play .ol-item.is-a:nth-child(6)::after{animation-delay:1.05s}
-#education.education-play .ol-item.is-a:nth-child(7)::before,#education.education-play .ol-item.is-a:nth-child(7)::after{animation-delay:1.2s}
-#education.education-play .ol-item.is-a:nth-child(8)::before,#education.education-play .ol-item.is-a:nth-child(8)::after{animation-delay:1.35s}
-#education.education-play .ol-item.is-a:nth-child(9)::before,#education.education-play .ol-item.is-a:nth-child(9)::after{animation-delay:1.5s}
-@keyframes eduStarOL{0%{transform:translateY(-50%) translateX(-180px) scale(.4) rotate(-30deg);opacity:0}30%{opacity:1;transform:translateY(-50%) translateX(-60px) scale(1.25) rotate(10deg)}70%{opacity:1}100%{transform:translateY(-50%) translateX(40px) scale(.8) rotate(20deg);opacity:0}}
+/* ===== LEADERSHIP PRESENTATION STAGE — 25s total (original cards untouched, hover untouched) ===== */
+/* Choreography: (1) 5 logos rise from centre -> circle forms, (2) wheel spins several turns IN THE CENTRE, */
+/* (3) whole wheel slides LEFT to the corner, (4) logos rotate one-by-one to the RIGHT side of the wheel, */
+/* each stops at EAST, highlights, and its detail shows in the right-hand space. Logos NEVER flip upside-down. */
+.lead-stage{display:none;margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:1.5rem;background:linear-gradient(160deg,rgba(77,166,255,.14),rgba(255,255,255,.03) 55%);overflow:hidden}
+.lead-stage.is-on{display:block}
+.lead-stage-head{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
+.lead-stage-kicker{font-size:.75rem;font-weight:800;letter-spacing:.12em;color:var(--blue-2)}
+.lead-skip{padding:.55rem 1rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);font-weight:700;font-size:.85rem}
+.lead-skip:hover{background:rgba(255,255,255,.14)}
+.lead-stage-body{position:relative;height:400px;margin-top:1.25rem}
+.lead-wheel-wrap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:left 1.2s cubic-bezier(.22,1,.36,1),top 1.2s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1);z-index:2}
+.lead-wheel-wrap.is-left{left:0;transform:translate(0,-50%)}
+.lead-wheel{position:relative;width:280px;height:280px;max-width:100%}
+.lead-ring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(126,192,255,.45);box-shadow:0 0 0 8px rgba(77,166,255,.06),0 0 44px rgba(77,166,255,.25) inset}
+.lead-ring-2{position:absolute;inset:26px;border-radius:50%;border:1px solid rgba(255,255,255,.14)}
+.lead-rotor{position:absolute;inset:0}
+.lead-dot-pos{position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;will-change:transform}
+.lead-dot{width:100%;height:100%;display:grid;place-items:center;border-radius:50%;background:#0D2E77;border:2px solid rgba(255,255,255,.22);color:#fff;transition:background .4s ease,box-shadow .4s ease,border-color .4s ease,transform .4s ease;cursor:pointer}
+.lead-dot .icon{width:26px;height:26px}
+.lead-dot.is-active{background:var(--blue);color:#071A47;border-color:#fff;box-shadow:0 0 0 5px rgba(77,166,255,.25),0 0 34px rgba(77,166,255,.85);transform:scale(1.22)}
+.lead-dot.is-done{border-color:rgba(110,231,183,.7)}
+.lead-centre{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}
+.lead-centre b{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;line-height:1.15}
+.lead-centre span{display:block;margin-top:.3rem;font-size:.75rem;letter-spacing:.14em;color:var(--muted-2);font-weight:800}
+.lead-spot{position:absolute;right:0;top:50%;transform:translateY(-50%);width:calc(100% - 330px);min-height:250px;padding:1.5rem;border:1px solid rgba(255,255,255,.16);border-radius:1.25rem;background:var(--navy);box-shadow:0 24px 50px rgba(0,0,0,.35);overflow:hidden;opacity:0;transition:opacity .6s ease}
+.lead-spot.is-on{opacity:1}
+.lead-spot::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 200px at 15% 0%,rgba(77,166,255,.28),transparent 60%);pointer-events:none}
+.lead-spot-in{position:relative;animation:leadPop .6s cubic-bezier(.22,1,.36,1) both}
+@keyframes leadPop{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+.lead-spot-top{display:flex;align-items:center;gap:1rem}
+.lead-spot-icon{width:64px;height:64px;flex-shrink:0;display:grid;place-items:center;border-radius:1rem;background:rgba(77,166,255,.18);color:var(--blue-2)}
+.lead-spot-icon .icon{width:32px;height:32px}
+.lead-spot h3{font-size:1.65rem;line-height:1.15}
+.lead-spot .role-org{margin-top:.3rem}
+.lead-spot p.lead-spot-text{margin-top:1rem;font-size:1.05rem;line-height:1.8;color:var(--muted)}
+.lead-count{margin-top:1.25rem;display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:.85rem;letter-spacing:.06em}
+.lead-count .bar{flex:1;height:6px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+.lead-count .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4DA6FF,#7EC0FF);transition:width 2.2s linear}
+.lead-dots-row{display:flex;gap:.5rem;margin-top:1rem}
+.lead-dots-row button{width:34px;height:8px;border:0;border-radius:999px;background:rgba(255,255,255,.18);padding:0}
+.lead-dots-row button.is-on{background:var(--blue)}
+.lead-stage.is-done{animation:leadFadeOut .7s ease both}
+@keyframes leadFadeOut{to{opacity:0;transform:translateY(14px)}}
+#leadership .role-grid.lead-reveal .role-card{animation:leadFloatIn .8s cubic-bezier(.22,1,.36,1) both}
+#leadership .role-grid.lead-reveal .role-card:nth-child(2){animation-delay:.12s}
+#leadership .role-grid.lead-reveal .role-card:nth-child(3){animation-delay:.24s}
+#leadership .role-grid.lead-reveal .role-card:nth-child(4){animation-delay:.36s}
+#leadership .role-grid.lead-reveal .role-card:nth-child(5){animation-delay:.48s}
+#leadership .role-grid.lead-reveal .role-card:nth-child(6){animation-delay:.6s}
+@keyframes leadFloatIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+@media(max-width:899px){
+  .lead-stage-body{height:660px}
+  .lead-wheel-wrap{top:150px}
+  .lead-wheel-wrap.is-left{left:50%;transform:translate(-50%,0);top:0}
+  .lead-spot{left:0;right:auto;top:auto;bottom:0;transform:none;width:100%}
+}
+@media(prefers-reduced-motion:reduce){.lead-wheel-wrap,.lead-count .bar i{transition:none}}
+
 </style>
 </head>
 <body>
@@ -1653,10 +1738,6 @@ section[id] { scroll-margin-top: 5rem; }
               <dd>Digital · Business · Technology</dd>
             </div>
           </dl>
-          <a href="#contact" class="link-accent">
-            Get in touch <svg class="icon"><use href="#i-arrow"></use></svg>
-          </a>
-          <br>
           <a class="pdf-link" href="UGC-selection-certificate.pdf" target="_blank" rel="noopener">🎓 View Campus Selection Letter (PDF)</a>
         </aside>
       </div>
@@ -1699,7 +1780,7 @@ section[id] { scroll-margin-top: 5rem; }
               <h4>Business Studies</h4>
               <p class="muted small">Commerce Stream</p>
             </article>
-            <article class="subject-card card-hover">
+            <article class="subject-card card-hover is-b">
               <p class="grade-big">B</p>
               <h4>Economics</h4>
               <p class="muted small">Commerce Stream</p>
@@ -1723,13 +1804,13 @@ section[id] { scroll-margin-top: 5rem; }
           <div class="ol-grid">
             <div class="ol-item is-a"><span>Mathematics</span><span class="grade grade-a">A</span></div>
             <div class="ol-item is-a"><span>Science</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>English</span><span class="grade grade-b">B</span></div>
+            <div class="ol-item is-b"><span>English</span><span class="grade grade-b">B</span></div>
             <div class="ol-item is-a"><span>Commerce</span><span class="grade grade-a">A</span></div>
             <div class="ol-item is-a"><span>Sinhala</span><span class="grade grade-a">A</span></div>
             <div class="ol-item is-a"><span>History</span><span class="grade grade-a">A</span></div>
             <div class="ol-item is-a"><span>Health Science</span><span class="grade grade-a">A</span></div>
             <div class="ol-item is-a"><span>Religion</span><span class="grade grade-a">A</span></div>
-            <div class="ol-item"><span>Art</span><span class="grade grade-c">C</span></div>
+            <div class="ol-item is-c"><span>Art</span><span class="grade grade-c">C</span></div>
           </div>
         </div>
       </div>
@@ -1751,7 +1832,18 @@ section[id] { scroll-margin-top: 5rem; }
           </p>
         </div>
 
-        <div class="role-grid">
+<div class="lead-stage" id="leadStage" hidden>
+          <div class="lead-stage-head">
+            <div><p class="lead-stage-kicker">LEADERSHIP &nbsp;•&nbsp; PRESENTATION</p><h3 style="margin-top:.3rem">Five roles, one story.</h3></div>
+            <button class="lead-skip" id="leadSkip" type="button">Skip presentation → Show all cards</button>
+          </div>
+          <div class="lead-stage-body">
+            <div class="lead-wheel-wrap" id="leadWheelWrap"><div class="lead-wheel"><div class="lead-ring"></div><div class="lead-ring-2"></div><div class="lead-rotor" id="leadRotor"></div><div class="lead-centre"><b id="leadCentreNum">1 / 5</b><span id="leadCentreLabel">SENIOR PREFECT</span></div></div></div>
+            <div class="lead-spot" id="leadSpotBox"><div class="lead-spot-in" id="leadSpot"></div></div>
+          </div>
+        </div>
+
+                <div class="role-grid">
 
           <article class="role-card card-hover">
             <div class="role-top">
@@ -1833,99 +1925,45 @@ section[id] { scroll-margin-top: 5rem; }
 
         <div class="skill-grid">
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-monitor"></use></svg></span>
-                <div>
-                  <h3>Web Development</h3>
-                  <p class="muted small">HTML · CSS · JavaScript</p>
-                </div>
-              </div>
-              <span class="skill-percent">82%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Web Development skill level">
-              <div style="width:82%"></div>
+          <article class="skill-card" data-pct="82">
+            <div class="skill-ring" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Web Development skill level 82 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-monitor"></use></svg></span><h3>Web Development</h3><p class="muted small">HTML · CSS · JavaScript</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-palette"></use></svg></span>
-                <div>
-                  <h3>UI / UX Design</h3>
-                  <p class="muted small">Clear layouts, readable type, accessible structure</p>
-                </div>
-              </div>
-              <span class="skill-percent">78%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="UI / UX Design skill level">
-              <div style="width:78%"></div>
+          <article class="skill-card" data-pct="78">
+            <div class="skill-ring" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="UI / UX Design skill level 78 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-palette"></use></svg></span><h3>UI / UX Design</h3><p class="muted small">Clear layouts, readable type, accessible structure</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-calculator"></use></svg></span>
-                <div>
-                  <h3>Accounting & Business Studies</h3>
-                  <p class="muted small">Commerce-stream foundation</p>
-                </div>
-              </div>
-              <span class="skill-percent">88%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Accounting and Business Studies skill level">
-              <div style="width:88%"></div>
+          <article class="skill-card" data-pct="88">
+            <div class="skill-ring" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Accounting & Business Studies skill level 88 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-calculator"></use></svg></span><h3>Accounting & Business Studies</h3><p class="muted small">Commerce-stream foundation</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-megaphone"></use></svg></span>
-                <div>
-                  <h3>Leadership & Communication</h3>
-                  <p class="muted small">Prefect, debate & media experience</p>
-                </div>
-              </div>
-              <span class="skill-percent">90%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Leadership and Communication skill level">
-              <div style="width:90%"></div>
+          <article class="skill-card" data-pct="90">
+            <div class="skill-ring" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Leadership & Communication skill level 90 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-megaphone"></use></svg></span><h3>Leadership & Communication</h3><p class="muted small">Prefect, debate & media experience</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-users"></use></svg></span>
-                <div>
-                  <h3>Teamwork & Problem Solving</h3>
-                  <p class="muted small">Scouts, cricket & group work</p>
-                </div>
-              </div>
-              <span class="skill-percent">86%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="Teamwork and Problem Solving skill level">
-              <div style="width:86%"></div>
+          <article class="skill-card" data-pct="86">
+            <div class="skill-ring" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="Teamwork & Problem Solving skill level 86 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-users"></use></svg></span><h3>Teamwork & Problem Solving</h3><p class="muted small">Scouts, cricket & group work</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
-          <article class="skill-card">
-            <div class="skill-top">
-              <div class="skill-info">
-                <span class="icon-box"><svg class="icon icon-md"><use href="#i-git"></use></svg></span>
-                <div>
-                  <h3>Git & GitHub</h3>
-                  <p class="muted small">Publishing and versioning this site</p>
-                </div>
-              </div>
-              <span class="skill-percent">80%</span>
-            </div>
-            <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Git and GitHub skill level">
-              <div style="width:80%"></div>
+          <article class="skill-card" data-pct="80">
+            <div class="skill-ring" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Git & GitHub skill level 80 percent">
+              <svg class="skill-ring-svg" viewBox="0 0 180 180" aria-hidden="true"><circle class="skill-ring-track" cx="90" cy="90" r="80"></circle><circle class="skill-ring-fill" cx="90" cy="90" r="80"></circle><circle class="skill-ring-dot" cx="90" cy="10" r="6"></circle></svg>
+              <div class="skill-ring-in"><span class="icon-box"><svg class="icon icon-md"><use href="#i-git"></use></svg></span><h3>Git & GitHub</h3><p class="muted small">Publishing and versioning this site</p><span class="skill-percent"><span class="skill-num">0</span>%</span></div>
             </div>
           </article>
 
@@ -1953,7 +1991,7 @@ section[id] { scroll-margin-top: 5rem; }
         <div class="project-grid">
 
           <!-- Project 1: live -->
-          <article class="project-card card-hover">
+          <article class="project-card card-hover project-spot">
             <span class="status status-live">● LIVE</span>
             <h3 class="project-title">Digital CV Website</h3>
             <p class="project-text">My CV, education and leadership presented as a clear, readable one-page site.</p>
@@ -1964,7 +2002,7 @@ section[id] { scroll-margin-top: 5rem; }
           </article>
 
           <!-- Project 2: this site -->
-          <article class="project-card project-card-current card-hover">
+          <article class="project-card project-card-current card-hover project-spot">
             <span class="status status-current">THIS SITE</span>
             <h3 class="project-title">Personal Portfolio Website</h3>
             <p class="project-text">CV and portfolio combined — one home for the journey, skills and achievements.</p>
@@ -2000,7 +2038,7 @@ section[id] { scroll-margin-top: 5rem; }
         <div class="section-head">
           <p class="section-kicker">CONTACT</p>
           <h2 class="section-title">Let’s stay connected.</h2>
-          <p class="section-copy">Reach out through GitHub, or leave a message using the preview form.</p>
+          <p class="section-copy">Reach out by email, LinkedIn or GitHub — or send a message straight to my inbox.</p>
         </div>
 
         <div class="contact-grid">
@@ -2025,25 +2063,34 @@ section[id] { scroll-margin-top: 5rem; }
               </span>
             </div>
 
-            <div class="contact-item">
+            <a href="mailto:chanithuwathmira@gmail.com" class="contact-item card-hover">
               <span class="icon-box icon-box-plain"><svg class="icon icon-lg"><use href="#i-mail"></use></svg></span>
               <span>
                 <span class="contact-label">Email</span>
-                <!-- CHANGE THIS: put your real email address here -->
-                <span class="contact-value">Email placeholder — add your address here</span>
+                <span class="contact-value contact-break">chanithuwathmira@gmail.com</span>
               </span>
-            </div>
+              <svg class="icon contact-arrow"><use href="#i-external"></use></svg>
+            </a>
+
+            <a href="https://www.linkedin.com/in/chanithu-liyanage/" target="_blank" rel="noopener" class="contact-item card-hover">
+              <span class="icon-box icon-box-plain"><svg class="icon icon-lg"><use href="#i-external"></use></svg></span>
+              <span>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value contact-break">linkedin.com/in/chanithu-liyanage</span>
+              </span>
+              <svg class="icon contact-arrow"><use href="#i-external"></use></svg>
+            </a>
 
             <div class="contact-note">
               <svg class="icon accent-2"><use href="#i-pin"></use></svg>
-              Commerce Stream · Loyola College · Sri Lanka
+              Wattala, Sri Lanka
             </div>
           </div>
 
           <!-- Right column: preview form (does NOT send anything) -->
-          <form class="contact-form" id="contactForm" aria-label="Contact preview form" novalidate>
-            <h3>Send a message <span class="badge badge-small badge-inline">PREVIEW ONLY</span></h3>
-            <p class="form-hint">Complete the fields to preview your message. This form does not send or store anything.</p>
+          <form class="contact-form" id="contactForm" aria-label="Contact form" novalidate>
+            <h3>Send a message <span class="badge badge-small badge-inline">DIRECT TO MY EMAIL</span></h3>
+            <p class="form-hint">Fill this in and it opens your email app with the message addressed to chanithuwathmira@gmail.com — just press Send there.</p>
 
             <div class="form-row">
               <label>
@@ -2062,7 +2109,7 @@ section[id] { scroll-margin-top: 5rem; }
             </label>
 
             <button type="submit" class="btn btn-primary">
-              Preview message <svg class="icon"><use href="#i-arrow"></use></svg>
+              Send message <svg class="icon"><use href="#i-arrow"></use></svg>
             </button>
 
             <!-- Status text + preview box (filled in by script.js) -->
@@ -2312,38 +2359,69 @@ $('futureBtn').addEventListener('click', function () {
 
 
 /* =========================================================
-   4. CONTACT FORM PREVIEW
-   (This form does NOT send or store anything.)
+   4. CONTACT FORM — opens the visitor's email app with a message addressed
+   DIRECTLY to chanithuwathmira@gmail.com (mailto:). Nothing is sent/stored by this site itself.
    ========================================================= */
 $('contactForm').addEventListener('submit', function (event) {
-  event.preventDefault();           // stop the page from reloading
-
+  event.preventDefault();
   var name    = $('fName').value.trim();
   var email   = $('fEmail').value.trim();
   var message = $('fMessage').value.trim();
-
   var status  = $('formStatus');
   var preview = $('previewBox');
-
   status.hidden = false;
-
-  // Something is empty -> show a hint
   if (!name || !email || !message) {
-    status.textContent = 'Add your name, email and message to see the preview.';
+    status.textContent = 'Add your name, email and message first.';
     preview.hidden = true;
     return;
   }
-
-  // Everything filled in -> show the preview.
-  // textContent is used (not innerHTML) so typed text can never run as code.
   $('pName').textContent    = name;
   $('pEmail').textContent   = '· ' + email;
   $('pMessage').textContent = message;
-
-  status.textContent = 'Preview only — this form does not send a message.';
   preview.hidden = false;
+  status.textContent = 'Opening your email app — your message is addressed to chanithuwathmira@gmail.com. Press Send there.';
+  var subject = 'Message from ' + name + ' (via portfolio site)';
+  var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+  window.location.href = 'mailto:chanithuwathmira@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 });
 
+
+/* PROJECTS: outside-frame white shadow glides smoothly around the border (lerped, never snapping). */
+(function(){
+  document.querySelectorAll('.project-spot').forEach(function(card){
+    var tx=50, ty=50, cx=50, cy=50, raf=null, hovering=false;
+    function frame(){
+      cx += (tx-cx)*0.14; cy += (ty-cy)*0.14;
+      card.style.setProperty('--mx', cx.toFixed(1)+'%');
+      card.style.setProperty('--my', cy.toFixed(1)+'%');
+      var dx=(cx-50)/50, dy=(cy-50)/50;
+      card.style.boxShadow=''; // no shadow under the card — silver ring around the frame only
+      if(hovering || Math.abs(tx-cx)>0.5 || Math.abs(ty-cy)>0.5) raf=requestAnimationFrame(frame); else raf=null;
+    }
+    card.addEventListener('pointermove', function(e){
+      var r=card.getBoundingClientRect();
+      tx=((e.clientX-r.left)/r.width)*100; ty=((e.clientY-r.top)/r.height)*100;
+      hovering=true; if(!raf) raf=requestAnimationFrame(frame);
+    });
+    card.addEventListener('pointerleave', function(){ hovering=false; tx=50; ty=50; if(!raf) raf=requestAnimationFrame(frame); });
+  });
+})();
+
+  // Nav-click replay: silver light sweeps once around the frame (perimeter), no shadow
+  window.__replayProjects=function(){
+    document.querySelectorAll('.project-spot').forEach(function(card,ci){
+      card.classList.add('is-sweep');
+      var t0=performance.now(), dur=1800, delay=ci*250;
+      (function step(now){
+        var el=now-t0-delay; if(el<0){ requestAnimationFrame(step); return; }
+        var pr=Math.min(1, el/dur), seg=pr*4, s=Math.floor(seg)%4, f=seg-Math.floor(seg), mx=50, my=50;
+        if(s===0){ mx=f*100; my=0; } else if(s===1){ mx=100; my=f*100; } else if(s===2){ mx=100-f*100; my=100; } else { mx=0; my=100-f*100; }
+        card.style.setProperty('--mx', mx.toFixed(1)+'%'); card.style.setProperty('--my', my.toFixed(1)+'%');
+        if(pr<1) requestAnimationFrame(step); else setTimeout(function(){ card.classList.remove('is-sweep'); }, 300);
+      })(t0);
+    });
+  };
+  document.querySelectorAll('a[href="#projects"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(function(){ if(window.__replayProjects) window.__replayProjects(); }, 350); }); });
 
 /* About presentation - play when About comes into view, replay on About nav click */
 (function(){
@@ -2352,17 +2430,206 @@ $('contactForm').addEventListener('submit', function (event) {
   var seen=false;
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.25});
   io.observe(about);
-  document.querySelectorAll('a[href="#about"]').forEach(function(a){ a.addEventListener('click', function(){ seen=true; setTimeout(play, 80); }); });
+  document.querySelectorAll('a[href="#about"]').forEach(function(a){ a.addEventListener('click', function(){ window.__aboutNavClick=true; about.classList.remove('about-text-in'); seen=true; setTimeout(play, 80); setTimeout(function(){ window.__aboutNavClick=false; }, 4500); }); });
+  // Scroll mode: text enters as soon as IT reaches ~half the screen (nav-click mode skips this)
+  var atxt=about.querySelector('.about-text');
+  if(atxt) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !window.__aboutNavClick){ about.classList.add('about-text-in'); } }); }, {rootMargin:'-45% 0px -45% 0px', threshold:0}).observe(atxt);
 })();
 
-/* Education A-grade shine+star - play on scroll into view, replay on Education nav click */
+/* HERO STRIP: first mouse-scroll DOWN only -> right to left, 3s */
 (function(){
-  var edu=document.getElementById('education'); if(!edu) return;
-  function play(){ edu.classList.remove('education-play'); void edu.offsetWidth; edu.classList.add('education-play'); }
-  var seen=false;
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.25});
-  io.observe(edu);
-  document.querySelectorAll('a[href="#education"]').forEach(function(a){ a.addEventListener('click', function(){ seen=true; setTimeout(play, 80); }); });
+  var done=false;
+  function onScroll(){ if(done) return; if(window.scrollY>10){ done=true; document.body.classList.add('hero-strip-in'); window.removeEventListener('wheel',onScroll); window.removeEventListener('touchmove',onScroll); } }
+  window.addEventListener('wheel',onScroll,{passive:true});
+  window.addEventListener('touchmove',onScroll,{passive:true});
+  window.__replayHero=function(){
+    // Like pressing refresh: restart EVERY hero animation, not just the strip.
+    // Photo slides in from the right, text fades up one by one, strip slides in — in the original order.
+    var els=document.querySelectorAll('.portrait-wrap, .hero-text .pill, .hero-title, .hero-lead, .hero-copy, .hero-buttons, .stats');
+    els.forEach(function(el){ el.style.animation='none'; });
+    document.body.classList.remove('hero-strip-in');
+    var strip=document.querySelector('.hero-strip'); if(strip) void strip.offsetWidth;
+    void document.body.offsetWidth;
+    requestAnimationFrame(function(){
+      els.forEach(function(el){ el.style.animation=''; });
+      document.body.classList.add('hero-strip-in');
+    });
+  };
+  // Home / Back-to-top / "You are here" — every click replays the home presentation
+  document.querySelectorAll('a[href="#home"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(function(){ if(window.__replayHero) window.__replayHero(); }, 350); }); });
+})();
+
+/* EDUCATION: A/L + O/L BOTH replay EVERY time they reach centre (like A/L did).
+   PLUS: if BOTH are visible on screen at once (tall screen / zoomed out), BOTH play together. */
+(function(){
+  var al=document.querySelector('.al-grid'); var ol=document.querySelector('.ol-grid');
+  var timers={};
+  function play(grid, cls, dur){
+    if(!grid || grid.dataset.playing==='1') return;
+    grid.dataset.playing='1';
+    grid.classList.remove(cls); void grid.offsetWidth; grid.classList.add(cls);
+    clearTimeout(timers[cls]);
+    timers[cls]=setTimeout(function(){ grid.dataset.playing='0'; grid.classList.remove(cls); }, dur);
+  }
+  function centreWatch(grid, cls, dur){
+    if(!grid) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) play(grid, cls, dur); });
+    }, {rootMargin:'-42% 0px -42% 0px', threshold:0}).observe(grid);
+  }
+  function fullyVisibleWatch(grid, cls, dur){
+    if(!grid) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) play(grid, cls, dur); });
+    }, {threshold:0.85}).observe(grid);
+  }
+  window.__replayEducation=function(){
+    if(al){ al.dataset.playing='0'; al.classList.remove('al-play'); void al.offsetWidth; }
+    if(ol){ ol.dataset.playing='0'; ol.classList.remove('ol-play'); void ol.offsetWidth; }
+    play(al,'al-play',5600); play(ol,'ol-play',3200);
+  };
+  document.querySelectorAll('a[href="#education"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(function(){ if(window.__replayEducation) window.__replayEducation(); }, 350); }); });
+  centreWatch(al,'al-play',5600); centreWatch(ol,'ol-play',3200);
+  fullyVisibleWatch(al,'al-play',5600); fullyVisibleWatch(ol,'ol-play',3200);
+})();
+
+/* SKILLS RINGS: replay CLEANLY every time Skills is entered (centre or fully visible).
+   Fix: reset is instant (transitions off for one frame) so the ring really empties, then refills. */
+(function(){
+  var grid=document.querySelector('.skill-grid'); if(!grid) return;
+  var cards=Array.prototype.slice.call(grid.querySelectorAll('.skill-card'));
+  var C=502.65, playing=false, rafIds=[], wasOut=true;
+  function resetInstant(){
+    rafIds.forEach(function(id){ cancelAnimationFrame(id); }); rafIds=[];
+    cards.forEach(function(c){
+      var fill=c.querySelector('.skill-ring-fill'), inner=c.querySelector('.skill-ring-in'), num=c.querySelector('.skill-num');
+      fill.style.transition='none'; inner.style.transition='none';
+      if(num) num.textContent='0';
+    });
+    grid.classList.remove('skill-play'); void grid.offsetWidth;
+    cards.forEach(function(c){
+      c.querySelector('.skill-ring-fill').style.transition='';
+      c.querySelector('.skill-ring-in').style.transition='';
+    });
+  }
+  function play(){
+    if(playing) return; playing=true;
+    resetInstant();
+    requestAnimationFrame(function(){
+      grid.classList.add('skill-play');
+      cards.forEach(function(c,i){
+        var pct=parseInt(c.dataset.pct,10)||0;
+        var fill=c.querySelector('.skill-ring-fill'), num=c.querySelector('.skill-num');
+        fill.style.transitionDelay=(i*0.12)+'s';
+        c.querySelector('.skill-ring-in').style.transitionDelay=(i*0.12)+'s';
+        c.style.setProperty('--ring-off', (C*(1-pct/100)).toFixed(1));
+        var dur=2000, delay=i*120, t0=null;
+        (function step(now){ if(t0===null) t0=now; var el=now-t0-delay; if(el<0){ rafIds.push(requestAnimationFrame(step)); return; }
+          var pr=Math.min(1, el/dur), e=1-Math.pow(1-pr,3); if(num) num.textContent=Math.round(pct*e);
+          if(pr<1) rafIds.push(requestAnimationFrame(step)); })(performance.now());
+      });
+      setTimeout(function(){ playing=false; }, 3200);
+    });
+  }
+  function onChange(e){ if(e.isIntersecting){ if(wasOut){ wasOut=false; play(); } } else { wasOut=true; } }
+  window.__replaySkills=function(){ playing=false; wasOut=true; play(); };
+  document.querySelectorAll('a[href="#skills"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(function(){ if(window.__replaySkills) window.__replaySkills(); }, 350); }); });
+  new IntersectionObserver(function(es){ es.forEach(onChange); }, {rootMargin:'-35% 0px -35% 0px', threshold:0}).observe(grid);
+  new IntersectionObserver(function(es){ es.forEach(onChange); }, {threshold:0.6}).observe(grid);
+})();
+
+/* LEADERSHIP PRESENTATION — 25s total. Centre -> circle -> spin (centre) -> slide LEFT -> one-by-one to EAST -> detail on right. Logos stay upright (counter-rotation every frame). */
+(function(){
+  var sec=document.getElementById('leadership'); if(!sec) return;
+  var stage=document.getElementById('leadStage'), grid=sec.querySelector('.role-grid'), rotor=document.getElementById('leadRotor');
+  var spot=document.getElementById('leadSpot'), spotBox=document.getElementById('leadSpotBox'), wheelWrap=document.getElementById('leadWheelWrap');
+  var centreNum=document.getElementById('leadCentreNum'), centreLabel=document.getElementById('leadCentreLabel');
+  var cards=Array.prototype.slice.call(grid.querySelectorAll('.role-card:not(.role-card-solid)'));
+  if(cards.length!==5) return;
+  var data=cards.map(function(c){ return { icon:c.querySelector('.icon-box').innerHTML, badge:(c.querySelector('.badge')||{}).textContent||'', title:c.querySelector('.role-title').textContent, org:c.querySelector('.role-org').textContent, text:c.querySelector('.role-text').textContent }; });
+  var started=false, timers=[], rafId=null, finished=false;
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function clearAll(){ timers.forEach(clearTimeout); timers=[]; if(rafId) cancelAnimationFrame(rafId); }
+  // Wheel state (JS-driven so icons never flip)
+  var state={ radius:0, rotor:0 };
+  var base=[]; // base angle per icon: -90, -18, 54, 126, 198
+  // Build dots: wrapper positions, inner is the visual circle
+  var dots=[];
+  data.forEach(function(d,i){ base.push(i*72-90);
+    var pos=document.createElement('div'); pos.className='lead-dot-pos';
+    var b=document.createElement('button'); b.type='button'; b.className='lead-dot'; b.setAttribute('aria-label',d.title);
+    b.innerHTML=d.icon; b.addEventListener('click', function(){ jumpTo(i); });
+    pos.appendChild(b); rotor.appendChild(pos); dots.push({pos:pos, btn:b});
+  });
+  function render(){
+    dots.forEach(function(d,i){
+      var a=base[i]+state.rotor;
+      d.pos.style.transform='rotate('+a+'deg) translate('+state.radius+'px) rotate('+(-a)+'deg)';
+    });
+  }
+  render();
+  var dotsRow=document.createElement('div'); dotsRow.className='lead-dots-row';
+  data.forEach(function(d,i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Go to '+(i+1)); b.addEventListener('click',function(){ jumpTo(i); }); dotsRow.appendChild(b); });
+  // Smooth animate of one numeric value
+  function tween(from,to,dur,apply,done){
+    var t0=performance.now();
+    function frame(now){ var p=Math.min(1,(now-t0)/dur); var e=1-Math.pow(1-p,3); apply(from+(to-from)*e); render(); if(p<1){ rafId=requestAnimationFrame(frame); } else if(done) done(); }
+    rafId=requestAnimationFrame(frame);
+  }
+  function show(i){
+    dots.forEach(function(d,j){ d.btn.classList.toggle('is-active', j===i); if(j<i) d.btn.classList.add('is-done'); });
+    Array.prototype.forEach.call(dotsRow.children, function(d,j){ d.classList.toggle('is-on', j===i); });
+    centreNum.textContent=(i+1)+' / 5'; centreLabel.textContent=data[i].title.toUpperCase();
+    spot.innerHTML='<div class="lead-spot-top"><span class="lead-spot-icon">'+data[i].icon+'</span><div><span class="badge badge-small">'+data[i].badge+'</span><h3 style="margin-top:.35rem">'+data[i].title+'</h3><p class="role-org">'+data[i].org+'</p></div></div><p class="lead-spot-text">'+data[i].text+'</p><div class="lead-count"><span>'+(i+1)+' OF 5</span><span class="bar"><i id="leadBar"></i></span><span>2.2s</span></div>';
+    spot.appendChild(dotsRow);
+    requestAnimationFrame(function(){ var bar=document.getElementById('leadBar'); if(bar) bar.style.width='100%'; });
+  }
+  // Rotate (shortest path) until icon i sits at EAST (angle 0) — 72 deg steps, smooth
+  function rotateToEast(i, dur, done){
+    var want=((-base[i])%360+360)%360;                 // rotor angle (mod 360) that puts icon i at EAST
+    var have=((state.rotor%360)+360)%360;
+    var delta=(((want-have+540)%360)-180);             // shortest delta, -180..180
+    if(delta===0) delta=360;
+    var from=state.rotor;
+    tween(from,from+delta,dur,function(v){ state.rotor=v; },done);
+  }
+  var current=0, playing=false;
+  function playIcon(i){
+    current=i; playing=true;
+    rotateToEast(i, 1200, function(){ show(i); later(function(){ if(i+1<5) playIcon(i+1); else finish(); }, 2200); });
+  }
+  function jumpTo(i){ if(!playing||finished) return; clearAll(); spotBox.classList.add('is-on'); playIcon(i); }
+  function finish(){
+    if(finished) return; finished=true; playing=false; stage.classList.add('is-done');
+    later(function(){ stage.hidden=true; stage.classList.remove('is-on','is-done'); grid.style.display=''; grid.classList.add('lead-reveal'); }, 750);
+  }
+  document.getElementById('leadSkip').addEventListener('click', function(){ clearAll(); finish(); });
+  function startPresentation(){
+    clearAll(); finished=false; started=true; playing=false;
+    state.radius=0; state.rotor=0; render();
+    dots.forEach(function(d){ d.btn.classList.remove('is-active','is-done'); });
+    centreNum.textContent='1 / 5'; centreLabel.textContent=data[0].title.toUpperCase();
+    stage.hidden=false; stage.classList.remove('is-done'); stage.classList.add('is-on');
+    grid.style.display='none'; grid.classList.remove('lead-reveal');
+    wheelWrap.classList.remove('is-left'); spotBox.classList.remove('is-on');
+    spot.innerHTML='';
+    tween(0,112,900,function(v){ state.radius=v; }, function(){
+      var from=state.rotor;
+      tween(from,from+1080,3500,function(v){ state.rotor=v; }, function(){
+        wheelWrap.classList.add('is-left'); spotBox.classList.add('is-on');
+        later(function(){ playIcon(0); }, 1300);
+      });
+    });
+  }
+  window.__replayLeadership=startPresentation;
+  document.querySelectorAll('a[href="#leadership"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(startPresentation, 350); }); });
+  new IntersectionObserver(function(es){ es.forEach(function(e){
+    if(e.isIntersecting && !started){ startPresentation(); }
+  }); }, {rootMargin:'-42% 0px -42% 0px', threshold:0}).observe(sec);
+})();
+
+/* CONTACT: replay — items fade up on every nav click to Contact */
+(function(){
+  var sec=document.getElementById('contact'); if(!sec) return;
+  document.querySelectorAll('a[href="#contact"]').forEach(function(a){ a.addEventListener('click', function(){ setTimeout(function(){ sec.classList.remove('contact-play'); void sec.offsetWidth; sec.classList.add('contact-play'); }, 350); }); });
 })();
 </script>
 </body>
